@@ -1,131 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>DebloatX</title>
-
-    <!-- ✅ Load Poppins from Google Fonts -->
-   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-    <!-- ✅ Link your external stylesheet -->
-    <link rel="stylesheet" href="style.css"/>
-
-    <!-- ✅ Apply Poppins globally -->
-    <style>
-        body, h1, h2, h3, h4, h5, h6, p, a, ul, li, button {
-            font-family: 'Poppins', sans-serif;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Luxury Streetwear</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <header class="site-header">
-        <nav class="nav-container">
-            <ul class="nav-list">
-                <li class="cart"><a href="#">🛒</a></li>
-                <li><a href="shoes.html">Shoes</a></li>
-                <li><a href="clothing.html">Clothing</a></li>
-                <li><a href="perfumes.html">Perfumes</a></li>
-                <li><a href="beauty.html">Beauty Products</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="hero">
-        <div class="overlay-text">
-            <h1>DebloatX</h1>
-            <p>Luxury scents &amp; streetwear — dropshipped to your door.</p>
-        </div>
+  <!-- ─── Navigation ─────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="nav-container">
+      <ul class="nav-list">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Why Us</a></li>
+        <li><a href="#">Coming Soon</a></li>
+        <li><a href="#">Best Sellers</a></li>
+      </ul>
     </div>
+  </header>
 
-    <section class="why-us">
-        <div class="overlay-section">
-            <h2>Why Choose Us?</h2>
-            <ul>
-                <li>Curated collection of luxury &amp; street fashion fragrances</li>
-                <li>Fast, free shipping on all orders</li>
-                <li>100% authentic products — no fakes, ever</li>
-                <li>Exclusive prices. Only online.</li>
-            </ul>
+  <!-- ─── Hero Section ────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="overlay-text">
+      <h1>Luxury Streetwear</h1>
+      <p>Where fashion meets the edge of bold design</p>
+    </div>
+  </section>
+
+  <!-- ─── Why Us Section ──────────────────────────────────────────── -->
+  <section class="why-us">
+    <div class="overlay-section">
+      <h2>Why Choose Us</h2>
+      <ul>
+        <li>Premium Materials</li>
+        <li>Limited Edition Designs</li>
+        <li>Designed for Confidence</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─── Coming Soon Section ─────────────────────────────────────── -->
+  <section class="coming-soon">
+    <div class="overlay-section">
+      <h2>Coming Soon</h2>
+      <p>Our next drop redefines modern streetwear — stay tuned!</p>
+    </div>
+  </section>
+
+  <!-- ─── Best Sellers Section ────────────────────────────────────── -->
+  <section class="best-sellers">
+    <div class="overlay-section">
+      <h2>Our Best Sellers</h2>
+      <div class="best-sellers-grid">
+        <div class="best-seller-item">
+          <img src="product1.jpg" alt="Product 1" />
+          <h3>Product One</h3>
+          <p>Our first best-seller, known for quality and style.</p>
+          <a href="#" class="button">Buy Now</a>
         </div>
-    </section>
-
-    <section class="best-sellers">
-        <div class="overlay-section">
-            <h2>Our Best Sellers</h2>
-            <div class="best-sellers-grid">
-
-                <div class="best-seller-item">
-                    <img src="pant1.png" alt="Baggy Pants">
-                    <h3>Urban Commando Cargo Pants</h3>
-                    <p>Dominating the streets, these multi-pocket cargo pants blend rugged utility with a comfortable, relaxed fit. Perfect for the urban explorer seeking style and function.</p>
-                    <a href="#" class="button">View Details</a>
-                </div>
-
-                <div class="best-seller-item">
-                    <img src="y2k-baggy-jeans.jpg" alt="Y2K Baggy Jeans">
-                    <h3>Nostalgia Ride Y2K Denim</h3>
-                    <p>Throwback style meets modern comfort. These iconic wide-leg jeans with subtle embroidery capture the essence of early 2000s hip-hop fashion.</p>
-                    <a href="#" class="button">View Details</a>
-                </div>
-
-                <div class="best-seller-item">
-                    <img src="irregular-texture-shirt.jpg" alt="Irregular Design Shirt">
-                    <h3>Abstract Flow Long Sleeve Shirt</h3>
-                    <p>Redefine your style with this uniquely textured, irregular-design shirt. Its distinctive crinkled fabric adds an artistic edge to any outfit.</p>
-                    <a href="#" class="button">View Details</a>
-                </div>
-
-                <div class="best-seller-item">
-                    <img src="corduroy-shirt.jpg" alt="Corduroy Shirt">
-                    <h3>Classic Ribbed Corduroy Shirt</h3>
-                    <p>Timeless appeal and soft texture. This versatile corduroy shirt offers a sophisticated yet casual look, perfect for layering or standalone style.</p>
-                    <a href="#" class="button">View Details</a>
-                </div>
-
-                <div class="best-seller-item">
-                    <img src="waffle-knit-sweater.jpg" alt="Waffle Knit Sweater">
-                    <h3>Cozy Waffle Weave Pullover</h3>
-                    <p>Embrace ultimate comfort and style with our best-selling waffle knit sweater. Its rich texture and soft feel make it an essential for cooler days.</p>
-                    <a href="#" class="button">View Details</a>
-                </div>
-
-                <div class="best-seller-item">
-                    <img src="placeholder-shoe.jpg" alt="Best Selling Shoe">
-                    <h3>Luxury Comfort Sneakers</h3>
-                    <p>Experience unparalleled comfort and style with our top-selling luxury sneakers. Crafted with premium leather for all-day wear.</p>
-                    <a href="#" class="button">View Details</a>
-                </div>
-
-                <div class="best-seller-item">
-                    <img src="placeholder-perfume.jpg" alt="Best Selling Perfume">
-                    <h3>Midnight Bloom Eau de Parfum</h3>
-                    <p>Our most sought-after fragrance, an intoxicating blend of floral and woody notes. Captivating and perfect for evening wear.</p>
-                    <a href="#" class="button">View Details</a>
-                </div>
-
-                <div class="best-seller-item">
-                    <img src="placeholder-beauty.jpg" alt="Best Selling Beauty Product">
-                    <h3>Radiant Glow Serum</h3>
-                    <p>Experience a transformation with our best-selling serum. Revitalizes skin for a smoother, brighter, and more youthful complexion.</p>
-                    <a href="#" class="button">View Details</a>
-                </div>
-
-            </div>
+        <div class="best-seller-item">
+          <img src="product2.jpg" alt="Product 2" />
+          <h3>Product Two</h3>
+          <p>Customer favorite for its versatility and value.</p>
+          <a href="#" class="button">Buy Now</a>
         </div>
-    </section>
-
-    <section class="coming-soon">
-        <div class="overlay-section">
-            <h2>Elevate Your Scent</h2>
-            <p>Explore our best-selling perfumes soon — made for those who move with style.</p>
+        <div class="best-seller-item">
+          <img src="product3.jpg" alt="Product 3" />
+          <h3>Product Three</h3>
+          <p>Elegant design and premium materials set this apart.</p>
+          <a href="#" class="button">Buy Now</a>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-        <p>&copy; 2025 DebloatX. All rights reserved.</p>
-    </footer>
+  <!-- ─── Footer ──────────────────────────────────────────────────── -->
+  <footer>
+    <p>&copy; 2025 Luxury Streetwear. All rights reserved.</p>
+  </footer>
 
 </body>
 </html>
