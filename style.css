@@ -3,7 +3,8 @@ body {
     margin: 0;
     padding: 0;
     background: url('lol.png') center center / cover no-repeat fixed;
-    font-family: 'Playfair Display', serif;
+    body {
+    font-family: 'Poppins', sans-serif;
     color: white;
 }
 
