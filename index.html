@@ -231,73 +231,78 @@
   function showCart() {
     const cartSection = document.getElementById('cart');
     const cartList = document.getElementById('cart-items');
-    const checkoutBtn = document.getElementById('checkout-btn');
     cartList.innerHTML = '';
 
     if (cartItems.length === 0) {
       cartList.innerHTML = '<li>Your cart is empty.</li>';
-      checkoutBtn.disabled = true;
     } else {
       cartItems.forEach((item, index) => {
         const li = document.createElement('li');
 
-        // Create checkbox input
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.id = 'cart-checkbox-' + index;
-        checkbox.checked = false;
-
-        // On checkbox toggle, update checkout button status
-        checkbox.addEventListener('change', () => {
-          updateCheckoutButton();
-        });
-
-        // Create label span for product name
-        const label = document.createElement('span');
-        label.textContent = item;
-
-        // Create remove button
-        const removeBtn = document.createElement('button');
-        removeBtn.className = 'remove-btn';
-        removeBtn.textContent = 'Remove';
-        removeBtn.onclick = () => removeFromCart(index);
-
-        li.appendChild(checkbox);
-        li.appendChild(label);
-        li.appendChild(removeBtn);
+        li.innerHTML = `
+          <input type="checkbox" id="select-${index}" data-index="${index}" onchange="toggleCheckoutButton()" />
+          <span>${item}</span>
+          <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+        `;
 
         cartList.appendChild(li);
       });
+    }
 
+    // Add or update Checkout button only once after the list
+    if (!document.getElementById('checkout-btn')) {
+      const checkoutBtn = document.createElement('button');
+      checkoutBtn.id = 'checkout-btn';
+      checkoutBtn.textContent = 'Checkout';
       checkoutBtn.disabled = true;
+      checkoutBtn.onclick = checkoutSelected;
+      cartSection.appendChild(checkoutBtn);
+    }
+
+    // Add or update Close Cart button only once after checkout button
+    if (!document.getElementById('close-cart-btn')) {
+      const closeBtn = document.createElement('button');
+      closeBtn.id = 'close-cart-btn';
+      closeBtn.textContent = 'Close Cart';
+      closeBtn.onclick = closeCart;
+      cartSection.appendChild(closeBtn);
     }
 
     cartSection.style.display = 'block';
   }
 
-  function updateCheckoutButton() {
+  function toggleCheckoutButton() {
     const checkboxes = document.querySelectorAll('#cart-items input[type="checkbox"]');
     const checkoutBtn = document.getElementById('checkout-btn');
-    const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
-    checkoutBtn.disabled = !anyChecked;
+
+    // Enable checkout if at least one checkbox is checked
+    const isAnyChecked = Array.from(checkboxes).some(cb => cb.checked);
+
+    checkoutBtn.disabled = !isAnyChecked;
   }
 
-  function checkout() {
+  function checkoutSelected() {
     const checkboxes = document.querySelectorAll('#cart-items input[type="checkbox"]');
     const selectedItems = [];
 
-    checkboxes.forEach((cb, idx) => {
-      if (cb.checked) selectedItems.push(cartItems[idx]);
+    checkboxes.forEach(cb => {
+      if (cb.checked) {
+        const idx = parseInt(cb.getAttribute('data-index'), 10);
+        selectedItems.push(cartItems[idx]);
+      }
     });
 
     if (selectedItems.length === 0) {
-      alert('Please select items to checkout.');
+      alert('Please select at least one item to checkout.');
       return;
     }
 
-    alert('Checking out:\n' + selectedItems.join('\n'));
+    // For demo: just alert the selected items.
+    // Replace this with real checkout flow as needed.
+    alert('Checking out the following items:\n' + selectedItems.join('\n'));
 
-    // Remove checked items from cart after checkout
+    // Optional: remove checked items from cart after checkout
+    // Remove from last to first to avoid index shifting issues
     for (let i = cartItems.length - 1; i >= 0; i--) {
       if (checkboxes[i].checked) {
         cartItems.splice(i, 1);
@@ -312,6 +317,7 @@
     document.getElementById('cart').style.display = 'none';
   }
 </script>
+
 
 </body>
 </html>
