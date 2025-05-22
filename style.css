@@ -3,9 +3,10 @@ body {
     margin: 0;
     padding: 0;
     background: url('lol.png') center center / cover no-repeat fixed;
-    body {
-    font-family: 'Poppins', sans-serif;
+    /* Force global white text */
+body, h1, h2, h3, h4, h5, h6, p, a, li, ul, button, span {
     color: white;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* ─── Top Navigation Bar (Translucent Pane) ───────────────────────────────── */
