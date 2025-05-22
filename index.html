@@ -1,132 +1,401 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>DebloatX</title>
+/* ─── Global & Background ─────────────────────────────────────────────────── */
+body {
+    margin: 0;
+    padding: 0;
+    background: url('lol.png') center center / cover no-repeat fixed;
+    font-family: 'Poppins', sans-serif;
+    color: white; /* ✅ This makes all text white unless overridden */
+}
 
-    <!-- ✅ Load Poppins from Google Fonts -->
-   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+/* ─── Top Navigation Bar (Translucent Pane) ───────────────────────────────── */
+.site-header {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 15px 0;
+    position: relative;
+    z-index: 1000;
+}
 
-    <!-- ✅ Link your external stylesheet -->
-    <link rel="stylesheet" href="style.css"/>
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 30px; /* Added horizontal padding to nav container */
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
 
-    <!-- ✅ Apply Poppins globally -->
-    <style>
-        body, h1, h2, h3, h4, h5, h6, p, a, ul, li, button {
-            font-family: 'Poppins', sans-serif;
-        }
-    </style>
-</head>
-<body>
+.nav-list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
 
-    <header class="site-header">
-        <nav class="nav-container">
-            <ul class="nav-list">
-                <li class="cart"><a href="#">🛒</a></li>
-                <li><a href="shoes.html">Shoes</a></li>
-                <li><a href="clothing.html">Clothing</a></li>
-                <li><a href="perfumes.html">Perfumes</a></li>
-                <li><a href="beauty.html">Beauty Products</a></li>
-            </ul>
-        </nav>
-    </header>
+.nav-list li {
+    margin: 0 20px;
+}
 
-    <div class="hero">
-        <div class="overlay-text">
-            <h1>DebloatX</h1>
-            <p>Luxury scents &amp; streetwear — dropshipped to your door.</p>
-        </div>
-    </div>
+.nav-list a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    transition: color 0.2s ease;
+}
 
-    <section class="why-us">
-        <div class="overlay-section">
-            <h2>Why Choose Us?</h2>
-            <ul>
-                <li>Curated collection of luxury &amp; street fashion fragrances</li>
-                <li>Fast, free shipping on all orders</li>
-                <li>100% authentic products — no fakes, ever</li>
-                <li>Exclusive prices. Only online.</li>
-            </ul>
-        </div>
-    </section>
+.nav-list a:hover {
+    color: #ccc;
+}
 
-    <section class="best-sellers">
-        <div class="overlay-section">
-            <h2>Our Best Sellers</h2>
-            <div class="best-sellers-grid">
+/* ─── Hero Section ───────────────────────────────────────────────────────── */
+.hero {
+    min-height: 95vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* Removed padding here as the overlay-text will handle it */
+    box-sizing: border-box;
+    /* To make it cover full width horizontally */
+    width: 100%;
+}
 
-                <div class="best-seller-item">
-                    <img src="pant1.png" alt="Baggy Pants">
-                    <h3>Urban Commando Cargo Pants</h3>
-                    <p>Dominating the streets, these multi-pocket cargo pants blend rugged utility with a comfortable, relaxed fit. Perfect for the urban explorer seeking style and function.</p>
-                    <a href="#" class="button">View Details</a>
-                </div>
+.overlay-text {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 80px 100px;
+    border-radius: 0px; /* Removed border-radius to ensure sharp edges to the sides */
+    max-width: none; /* Removed max-width */
+    width: 100%; /* Make it take full width of its parent */
+    box-sizing: border-box; /* Include padding in width */
+}
 
-                <div class="best-seller-item">
-                    <img src="y2k-baggy-jeans.jpg" alt="Y2K Baggy Jeans">
-                    <h3>Nostalgia Ride Y2K Denim</h3>
-                    <p>Throwback style meets modern comfort. These iconic wide-leg jeans with subtle embroidery capture the essence of early 2000s hip-hop fashion.</p>
-                    <a href="#" class="button">View Details</a>
-                </div>
+h1 {
+    font-size: 5.5rem;
+    margin: 0;
+    font-weight: 700;
+}
 
-                <div class="best-seller-item">
-                    <img src="irregular-texture-shirt.jpg" alt="Irregular Design Shirt">
-                    <h3>Abstract Flow Long Sleeve Shirt</h3>
-                    <p>Redefine your style with this uniquely textured, irregular-design shirt. Its distinctive crinkled fabric adds an artistic edge to any outfit.</p>
-                    <a href="#" class="button">View Details</a>
-                </div>
+h1 + p {
+    font-size: 2.5rem;
+    margin-top: 15px;
+}
 
-                <div class="best-seller-item">
-                    <img src="corduroy-shirt.jpg" alt="Corduroy Shirt">
-                    <h3>Classic Ribbed Corduroy Shirt</h3>
-                    <p>Timeless appeal and soft texture. This versatile corduroy shirt offers a sophisticated yet casual look, perfect for layering or standalone style.</p>
-                    <a href="#" class="button">View Details</a>
-                </div>
+/* ─── Content Sections ────────────────────────────────────────────────────── */
+section {
+    padding: 0; /* Removed padding here, overlay-section will handle it */
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    /* To make it cover full width horizontally */
+    width: 100%;
+    margin-top: -1px; /* Small negative margin to prevent tiny gaps between sections */
+}
 
-                <div class="best-seller-item">
-                    <img src="waffle-knit-sweater.jpg" alt="Waffle Knit Sweater">
-                    <h3>Cozy Waffle Weave Pullover</h3>
-                    <p>Embrace ultimate comfort and style with our best-selling waffle knit sweater. Its rich texture and soft feel make it an essential for cooler days.</p>
-                    <a href="#" class="button">View Details</a>
-                </div>
+.overlay-section {
+    background-color: rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+    padding: 100px 10%; /* Increased padding for height, used percentage for width responsiveness */
+    border-radius: 0px; /* Removed border-radius for sharp edges */
+    max-width: none; /* Removed max-width */
+    width: 100%; /* Make it take full width */
+    box-sizing: border-box; /* Include padding in width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-                <div class="best-seller-item">
-                    <img src="placeholder-shoe.jpg" alt="Best Selling Shoe">
-                    <h3>Luxury Comfort Sneakers</h3>
-                    <p>Experience unparalleled comfort and style with our top-selling luxury sneakers. Crafted with premium leather for all-day wear.</p>
-                    <a href="#" class="button">View Details</a>
-                </div>
+.why-us h2,
+.coming-soon h2,
+.best-sellers h2 {
+    font-size: 3.8rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
 
-                <div class="best-seller-item">
-                    <img src="placeholder-perfume.jpg" alt="Best Selling Perfume">
-                    <h3>Midnight Bloom Eau de Parfum</h3>
-                    <p>Our most sought-after fragrance, an intoxicating blend of floral and woody notes. Captivating and perfect for evening wear.</p>
-                    <a href="#" class="button">View Details</a>
-                </div>
+.why-us ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1.5rem;
+    line-height: 2.2rem;
+}
 
-                <div class="best-seller-item">
-                    <img src="placeholder-beauty.jpg" alt="Best Selling Beauty Product">
-                    <h3>Radiant Glow Serum</h3>
-                    <p>Experience a transformation with our best-selling serum. Revitalizes skin for a smoother, brighter, and more youthful complexion.</p>
-                    <a href="#" class="button">View Details</a>
-                </div>
+.why-us li {
+    margin: 15px 0;
+}
 
-            </div>
-        </div>
-    </section>
+.coming-soon p {
+    font-size: 1.8rem;
+    margin-top: 15px;
+}
 
-    <section class="coming-soon">
-        <div class="overlay-section">
-            <h2>Elevate Your Scent</h2>
-            <p>Explore our best-selling perfumes soon — made for those who move with style.</p>
-        </div>
-    </section>
+/* ─── Best Sellers Section (Backdrop Between Products) ────────────────────── */
+.best-sellers {
+    padding: 100px 30px;
+    background-color: rgba(0, 0, 0, 0.6); /* Dark semi-transparent background for the whole section */
+    width: 100%; /* Ensure full width */
+    box-sizing: border-box; /* Include padding in width */
+}
 
-    <footer>
-        <p>&copy; 2025 DebloatX. All rights reserved.</p>
-    </footer>
+.best-sellers .overlay-section {
+    max-width: 1200px;
+    padding: 0; /* Remove padding from the overlay-section */
+    margin: 0 auto; /* Center the container */
+}
 
+.best-sellers-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 80px; /* Gap where the backdrop will show */
+    margin-top: 40px;
+    align-items: center;
+    background-color: transparent; /* Make the grid container transparent */
+    padding: 60px 80px; /* Add padding around the grid for spacing within the full-width section */
+    box-sizing: border-box;
+}
 
-</body>
-</html>
+.best-seller-item {
+    background-color: rgba(0, 0, 0, 0.8); /* Slightly more opaque background for the items */
+    padding: 50px;
+    border-radius: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    max-width: 850px;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.best-seller-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+.best-seller-item img {
+    max-width: 100%;
+    height: 550px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 35px;
+}
+
+.best-seller-item h3 {
+    font-size: 3.5rem;
+    margin-bottom: 25px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.best-seller-item p {
+    font-size: 1.6rem;
+    line-height: 2;
+    margin-bottom: 50px;
+    flex-grow: 1;
+}
+
+.button {
+    display: inline-block;
+    padding: 18px 35px;
+    background-color: #666;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    align-self: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.button:hover {
+    background-color: #888;
+    transform: translateY(-3px);
+}
+
+/* ─── Footer ──────────────────────────────────────────────────────────────── */
+footer {
+    background-color: #111;
+    padding: 40px 0; /* Adjusted padding to extend full width */
+    text-align: center;
+    border-top: 1px solid #333;
+    font-family: sans-serif;
+    position: relative;
+    z-index: 1;
+    width: 100%; /* Make it full width */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+footer p {
+    font-size: 1em;
+    color: #aaa;
+    margin-top: 10px;
+}
+
+/* ─── Responsive Adjustments ──────────────────────────────────────────────── */
+@media (max-width: 1200px) {
+    /* Keep nav-container max-width for internal content */
+    .nav-container {
+        max-width: 90%;
+        padding: 0 20px; /* Adjust padding for nav */
+    }
+    .overlay-text {
+        padding: 60px 80px;
+    }
+    h1 {
+        font-size: 4.5rem;
+    }
+    h1 + p {
+        font-size: 2rem;
+    }
+    .overlay-section {
+        padding: 80px 5%; /* Adjust percentage padding for wider screens */
+    }
+    .why-us h2,
+    .coming-soon h2,
+    .best-sellers h2 {
+        font-size: 3.2rem;
+    }
+    /* Best Sellers Grid internal content max-width */
+    .best-sellers-grid {
+        max-width: 900px;
+    }
+    .best-seller-item {
+        max-width: 90%;
+        padding: 40px;
+    }
+    .best-seller-item img {
+        height: 450px;
+    }
+    .best-seller-item h3 {
+        font-size: 3rem;
+    }
+    .best-seller-item p {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .overlay-text {
+        padding: 50px 60px;
+    }
+    h1 {
+        font-size: 4rem;
+    }
+    h1 + p {
+        font-size: 1.8rem;
+    }
+    .overlay-section {
+        padding: 60px 5%; /* Continue using percentage padding */
+    }
+    .why-us h2,
+    .coming-soon h2,
+    .best-sellers h2 {
+        font-size: 2.8rem;
+    }
+    .best-sellers-grid {
+        max-width: 700px;
+    }
+    .best-seller-item {
+        max-width: 95%;
+        padding: 35px;
+    }
+    .best-seller-item img {
+        height: 350px;
+    }
+    .best-seller-item h3 {
+        font-size: 2.5rem;
+    }
+    .best-seller-item p {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        min-height: 70vh;
+    }
+    .overlay-text {
+        padding: 30px 40px;
+    }
+    h1 {
+        font-size: 3.5rem;
+    }
+    h1 + p {
+        font-size: 1.5rem;
+    }
+    .why-us h2,
+    .coming-soon h2,
+    .best-sellers h2 {
+        font-size: 2.5rem;
+    }
+    .overlay-section {
+        padding: 40px 5%;
+    }
+    .best-sellers-grid {
+        max-width: 500px;
+        gap: 40px;
+    }
+    .best-seller-item {
+        padding: 25px;
+    }
+    .best-seller-item img {
+        height: 280px;
+    }
+    .best-seller-item h3 {
+        font-size: 2rem;
+    }
+    .best-seller-item p {
+        font-size: 1.2rem;
+    }
+    .button {
+        padding: 12px 25px;
+        font-size: 1.1rem;
+    }
+    .nav-list {
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .nav-list li {
+        margin: 5px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        min-height: 60vh;
+    }
+    .overlay-text {
+        padding: 20px 25px;
+    }
+    h1 {
+        font-size: 2.8rem;
+    }
+    h1 + p {
+        font-size: 1.2rem;
+    }
+    .why-us h2,
+    .coming-soon h2,
+    .best-sellers h2 {
+        font-size: 2rem;
+    }
+    .overlay-section {
+        padding: 30px 5%;
+    }
+    .best-sellers-grid {
+        max-width: 100%; /* Allow full width on smallest screens */
+        gap: 30px;
+    }
+    .best-seller-item {
+        padding: 20px;
+    }
+    .best-seller-item img {
+        height: 220px;
+    }
+    .best-seller-item h3 {
+        font-size: 1.8rem;
+    }
+    .best-seller-item p {
+        font-size: 1.1rem;
+    }
+}
