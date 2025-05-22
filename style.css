@@ -188,14 +188,18 @@ section {
 }
 
 .best-sellers {
-    margin-top: 0 !important;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .best-sellers .overlay-section {
     max-width: 1200px;
-    padding: 0; /* Remove padding from the overlay-section */
-    margin: 0 auto; /* Center the container */
+    padding: 0; /* already no padding */
+    margin: 0 auto;
 }
+
 
 .best-sellers-grid {
     display: flex;
