@@ -3,16 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title> DebloatX </title>
+  <title>DebloatX</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* Added simple style for cart */
+    .cart-section {
+      position: fixed;
+      top: 60px;
+      right: 20px;
+      background: white;
+      border: 1px solid #ddd;
+      padding: 20px;
+      width: 300px;
+      max-height: 400px;
+      overflow-y: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      z-index: 999;
+      display: none;
+    }
+    .cart-section h2 {
+      margin-top: 0;
+    }
+    .cart-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 10px 0;
+    }
+    .cart-section li {
+      padding: 5px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .cart-section button {
+      cursor: pointer;
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      font-weight: 600;
+      border-radius: 3px;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Include this in the <head> of your HTML file -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<!-- ─── Navigation ─────────────────────────────────────────────── -->
 <header class="site-header">
   <div class="nav-container">
     <ul class="nav-list">
@@ -22,7 +58,7 @@
       <li><a href="#">Sneakers</a></li>
     </ul>
     <div class="cart-button">
-      <a href="#cart">
+      <a href="#cart" onclick="showCart(); return false;">
         <i class="fas fa-shopping-cart cart-icon"></i>
         <span id="cart-count">0</span>
       </a>
@@ -30,71 +66,100 @@
   </div>
 </header>
 
+<!-- Cart Section -->
+<section id="cart" class="cart-section">
+  <h2>Your Cart</h2>
+  <ul id="cart-items">
+    <li>Your cart is empty.</li>
+  </ul>
+  <button onclick="closeCart()">Close Cart</button>
+</section>
 
+<section class="hero">
+  <div class="overlay-text">
+    <h1>DebloatX</h1>
+    <p>Luxury scents &amp; streetwear — dropshipped to your door.</p>
+  </div>
+</section>
 
-  <!-- ─── Hero Section ────────────────────────────────────────────── -->
-  <section class="hero">
-    <div class="overlay-text">
-      <h1>DebloatX</h1>
-      <p>Luxury scents &amp; streetwear — dropshipped to your door.</p>
-    </div>
-  </section>
-  
-
-  <!-- ─── Best Sellers Section ────────────────────────────────────── -->
-  <section class="best-sellers">
+<section class="best-sellers">
   <div class="overlay-section">
     <h2>Our Best Sellers</h2>
     <div class="best-sellers-grid">
-      
+
       <div class="best-seller-item">
-        <img src="pant1.png" alt="Product 1" />
+        <img src="pant1.png" alt="Baggy Y2k Star Jeans" />
         <h3>Baggy Y2k Star Jeans</h3>
-        <p>Flashy stars and nostalgic vibes bring back the era’s iconic aesthetic.</p>          
-        <button onclick="addToCart(); event.stopPropagation();">Add to Cart</button>
+        <p>Flashy stars and nostalgic vibes bring back the era’s iconic aesthetic.</p>
+        <button onclick="addToCart('Baggy Y2k Star Jeans'); event.stopPropagation();">Add to Cart</button>
       </div>
-      
+
       <div class="best-seller-item">
-        <img src="shoe1.png" alt="Product 2" />
+        <img src="shoe1.png" alt="Nike SB Force 58" />
         <h3>Nike SB Force 58</h3>
-        <p>The latest and greatest innovation to hit the streets, the Nike SB Force 58 gives you the durability of a cupsole with the flexibility of a vulcanised shoe.</p>          
-        <button onclick="addToCart(); event.stopPropagation();">Add to Cart</button>
+        <p>The latest and greatest innovation to hit the streets, the Nike SB Force 58 gives you the durability of a cupsole with the flexibility of a vulcanised shoe.</p>
+        <button onclick="addToCart('Nike SB Force 58'); event.stopPropagation();">Add to Cart</button>
       </div>
-      
+
       <div class="best-seller-item">
-        <img src="watch1.png" alt="Product 3" />
+        <img src="watch1.png" alt="Sonata Quartz Green Dial Watch" />
         <h3>Sonata Quartz Green Dial Watch</h3>
-        <p>The striking green dial, complemented by the luxurious golden stainless steel strap, offers a perfect blend of sophistication and masculinity.</p>          
-        <button onclick="addToCart(); event.stopPropagation();">Add to Cart</button>
+        <p>The striking green dial, complemented by the luxurious golden stainless steel strap, offers a perfect blend of sophistication and masculinity.</p>
+        <button onclick="addToCart('Sonata Quartz Green Dial Watch'); event.stopPropagation();">Add to Cart</button>
       </div>
-      
+
     </div>
   </div>
 </section>
 
-<!-- ─── Why Us Section ──────────────────────────────────────────── -->
-  <section class="why-us">
-    <div class="overlay-section">
-      <h2>Why Choose Us</h2>
-      <ul>
-         <li>Curated collection of luxury &amp; street fashion fragrances</li>
-                <li>Fast, free shipping on all orders</li>
-                <li>100% authentic products — no fakes, ever</li>
-                <li>Exclusive prices. Only online.</li>
-      </ul>
-    </div>
-  </section>
+<section class="why-us">
+  <div class="overlay-section">
+    <h2>Why Choose Us</h2>
+    <ul>
+      <li>Curated collection of luxury &amp; street fashion fragrances</li>
+      <li>Fast, free shipping on all orders</li>
+      <li>100% authentic products — no fakes, ever</li>
+      <li>Exclusive prices. Only online.</li>
+    </ul>
+  </div>
+</section>
 
-  <!-- ─── Footer ──────────────────────────────────────────────────── -->
-  <footer>
-    <p>&copy; 2025 DebloatX. All rights reserved.</p>
-  </footer>
+<footer>
+  <p>&copy; 2025 DebloatX. All rights reserved.</p>
+</footer>
+
 <script>
-  let cartCount = 0;
+  let cartItems = [];
 
-  function addToCart() {
-    cartCount++;
-    document.getElementById('cart-count').innerText = cartCount;
+  function addToCart(productName) {
+    cartItems.push(productName);
+    updateCartCount();
+    showCart();
+  }
+
+  function updateCartCount() {
+    document.getElementById('cart-count').innerText = cartItems.length;
+  }
+
+  function showCart() {
+    const cartSection = document.getElementById('cart');
+    const cartList = document.getElementById('cart-items');
+    cartList.innerHTML = '';
+
+    if (cartItems.length === 0) {
+      cartList.innerHTML = '<li>Your cart is empty.</li>';
+    } else {
+      cartItems.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        cartList.appendChild(li);
+      });
+    }
+    cartSection.style.display = 'block';
+  }
+
+  function closeCart() {
+    document.getElementById('cart').style.display = 'none';
   }
 </script>
 
