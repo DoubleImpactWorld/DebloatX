@@ -3,16 +3,165 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title> DebloatX </title>
+  <title>DebloatX</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* Improved Cart Section Styling */
+    .cart-section {
+      position: fixed;
+      top: 60px;
+      right: 20px;
+      background: rgba(30, 30, 30, 0.95);
+      border-radius: 12px;
+      padding: 25px 30px;
+      width: 320px;
+      max-height: 420px;
+      overflow-y: auto;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      z-index: 999;
+      display: none;
+      color: #f0f0f0;
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      line-height: 1.4;
+      user-select: none;
+    }
+
+    .cart-section h2 {
+      margin-top: 0;
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: 1px;
+      color: #fff;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #444;
+      padding-bottom: 10px;
+      position: relative;
+    }
+
+    .cart-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px 0;
+      max-height: 280px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #666 transparent;
+    }
+
+    .cart-section ul::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .cart-section ul::-webkit-scrollbar-thumb {
+      background-color: #666;
+      border-radius: 3px;
+    }
+
+    .cart-section li {
+      padding: 12px 10px;
+      border-bottom: 1px solid #444;
+      color: #ddd;
+      font-weight: 500;
+      cursor: default;
+      transition: background-color 0.2s ease;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    .cart-section li:hover {
+      background-color: #3a3a3a;
+    }
+
+    .cart-section button {
+      cursor: pointer;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      font-weight: 600;
+      border-radius: 30px;
+      margin-right: 10px;
+      box-shadow: 0 4px 10px rgba(37, 117, 252, 0.6);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      font-size: 14px;
+      user-select: none;
+    }
+
+    .cart-section button:hover:not(:disabled) {
+      background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+      box-shadow: 0 6px 14px rgba(106, 17, 203, 0.8);
+    }
+
+    .cart-section button:disabled {
+      background: #555;
+      cursor: not-allowed;
+      box-shadow: none;
+      color: #999;
+    }
+
+    .cart-section label {
+      font-weight: 600;
+      margin-left: 10px;
+      color: #eee;
+      font-size: 14px;
+      cursor: pointer;
+      flex-grow: 1;
+    }
+
+    .cart-section input[type="checkbox"] {
+      cursor: pointer;
+      width: 18px;
+      height: 18px;
+    }
+
+    .cart-section input, .cart-section textarea {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 14px;
+      background-color: #222;
+      color: #eee;
+      resize: vertical;
+      box-shadow: inset 0 0 6px #111;
+      transition: background-color 0.3s ease;
+    }
+
+    .cart-section input:focus, .cart-section textarea:focus {
+      background-color: #333;
+      outline: none;
+    }
+
+    .cart-section textarea {
+      min-height: 80px;
+    }
+
+    /* Close button inside cart */
+    .cart-section .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 24px;
+      color: #888;
+      cursor: pointer;
+      transition: color 0.2s ease;
+      user-select: none;
+    }
+
+    .cart-section .close-btn:hover {
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Include this in the <head> of your HTML file -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<!-- ─── Navigation ─────────────────────────────────────────────── -->
 <header class="site-header">
   <div class="nav-container">
     <ul class="nav-list">
@@ -22,7 +171,7 @@
       <li><a href="#">Sneakers</a></li>
     </ul>
     <div class="cart-button">
-      <a href="#cart">
+      <a href="#cart" onclick="showCart(); return false;">
         <i class="fas fa-shopping-cart cart-icon"></i>
         <span id="cart-count">0</span>
       </a>
@@ -30,71 +179,199 @@
   </div>
 </header>
 
+<!-- Cart Section -->
+<section id="cart" class="cart-section">
+  <span class="close-btn" onclick="closeCart()">&times;</span>
+  <h2>Your Cart</h2>
+  <ul id="cart-items">
+    <li>Your cart is empty.</li>
+  </ul>
+  <button onclick="closeCart()">Close Cart</button>
+  <button id="buy-now-btn" onclick="buyNow()" disabled>Buy Now</button>
+</section>
 
+<!-- Checkout Section -->
+<section id="checkout" class="cart-section">
+  <h2>Checkout</h2>
+  <form id="checkout-form">
+    <label for="full-name">Full Name:</label>
+    <input type="text" id="full-name" required />
 
-  <!-- ─── Hero Section ────────────────────────────────────────────── -->
-  <section class="hero">
-    <div class="overlay-text">
-      <h1>DebloatX</h1>
-      <p>Luxury scents &amp; streetwear — dropshipped to your door.</p>
-    </div>
-  </section>
-  
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" required />
 
-  <!-- ─── Best Sellers Section ────────────────────────────────────── -->
-  <section class="best-sellers">
-    <div class="overlay-section">
-      <h2>Our Best Sellers</h2>
-      <div class="best-sellers-grid">
-        <div class="best-seller-item">
-          <img src="pant1.png" alt="Product 1" />
-          <h3>Baggy Y2k Star Jeans</h3>
-          <p> Flashy stars and nostalgic vibes bring back the era’s iconic aesthetic.</p>          
-          <a href="#" <button onclick="addToCart()">Add to Cart</button>
+    <label for="address">Shipping Address:</label>
+    <textarea id="address" rows="3" required></textarea>
 
-        </div>
-         <div class="best-seller-item">
-  <img src="shoe1.png" alt="Product 2" />
-  <h3>Nike SB Force 58</h3>
-  <p>The latest and greatest innovation to hit the streets, the Nike SB Force 58 gives you the durability of a cupsole with the flexibility of a vulcanised shoe.</p>          
-  <button onclick="addToCart()">Add to Cart</button>
+    <button type="submit">Confirm Purchase</button>
+    <button type="button" onclick="cancelCheckout()">Cancel</button>
+  </form>
+</section>
 
-        </div>
-         <div class="best-seller-item">
-  <img src="watch1.png" alt="Product 3" />
-  <h3>Sonata Quartz Green Dial Watch</h3>
-  <p>The striking green dial, complemented by the luxurious golden stainless steel strap, offers a perfect blend of sophistication and masculinity.</p>          
-  <button onclick="addToCart()">Add to Cart</button>
-      
+<section class="hero">
+  <div class="overlay-text">
+    <h1>DebloatX</h1>
+    <p>Luxury scents &amp; streetwear — dropshipped to your door.</p>
+  </div>
+</section>
 
-        </div>
+<section class="best-sellers">
+  <div class="overlay-section">
+    <h2>Our Best Sellers</h2>
+    <div class="best-sellers-grid">
+
+      <div class="best-seller-item">
+        <img src="pant1.png" alt="Baggy Y2k Star Jeans" />
+        <h3>Baggy Y2k Star Jeans</h3>
+        <p>Flashy stars and nostalgic vibes bring back the era’s iconic aesthetic.</p>
+        <button onclick="addToCart('Baggy Y2k Star Jeans'); event.stopPropagation();">Add to Cart</button>
       </div>
-    </div>
-  </section>
 
-<!-- ─── Why Us Section ──────────────────────────────────────────── -->
-  <section class="why-us">
-    <div class="overlay-section">
-      <h2>Why Choose Us</h2>
-      <ul>
-         <li>Curated collection of luxury &amp; street fashion fragrances</li>
-                <li>Fast, free shipping on all orders</li>
-                <li>100% authentic products — no fakes, ever</li>
-                <li>Exclusive prices. Only online.</li>
-      </ul>
-    </div>
-  </section>
+      <div class="best-seller-item">
+        <img src="shoe1.png" alt="Nike SB Force 58" />
+        <h3>Nike SB Force 58</h3>
+        <p>The latest and greatest innovation to hit the streets, the Nike SB Force 58 gives you the durability of a cupsole with the flexibility of a vulcanised shoe.</p>
+        <button onclick="addToCart('Nike SB Force 58'); event.stopPropagation();">Add to Cart</button>
+      </div>
 
-  <!-- ─── Footer ──────────────────────────────────────────────────── -->
-  <footer>
-    <p>&copy; 2025 DebloatX. All rights reserved.</p>
-  </footer>
+      <div class="best-seller-item">
+        <img src="watch1.png" alt="Sonata Quartz Green Dial Watch" />
+        <h3>Sonata Quartz Green Dial Watch</h3>
+        <p>The striking green dial, complemented by the luxurious golden stainless steel strap, offers a perfect blend of sophistication and masculinity.</p>
+        <button onclick="addToCart('Sonata Quartz Green Dial Watch'); event.stopPropagation();">Add to Cart</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="why-us">
+  <div class="overlay-section">
+    <h2>Why Choose Us</h2>
+    <ul>
+      <li>Curated collection of luxury &amp; street fashion fragrances</li>
+      <li>Fast, free shipping on all orders</li>
+      <li>Unbeatable prices and discounts</li>
+      <li>100% authentic, guaranteed</li>
+    </ul>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>© 2025 DebloatX. All rights reserved.</p>
+</footer>
+
 <script>
-  let cartCount = 0;
+  let cartItems = [];
+  let selectedItems = new Set();
 
-  function addToCart() {
-    cartCount++;
-    document.getElementById('cart-count').innerText = cartCount;
+  function addToCart(productName) {
+    cartItems.push(productName);
+    selectedItems.add(cartItems.length - 1);
+    updateCartCount();
+    showCart();
+  }
+
+  function updateCartCount() {
+    document.getElementById('cart-count').innerText = cartItems.length;
+    const buyBtn = document.getElementById('buy-now-btn');
+    buyBtn.disabled = selectedItems.size === 0;
+  }
+
+  function showCart() {
+    const cartSection = document.getElementById('cart');
+    const cartList = document.getElementById('cart-items');
+    cartList.innerHTML = '';
+
+    if (cartItems.length === 0) {
+      cartList.innerHTML = '<li>Your cart is empty.</li>';
+      selectedItems.clear();
+    } else {
+      cartItems.forEach((item, index) => {
+        const li = document.createElement('li');
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = selectedItems.has(index);
+        checkbox.id = 'cart-item-' + index;
+
+        checkbox.addEventListener('change', () => {
+          if (checkbox.checked) {
+            selectedItems.add(index);
+          } else {
+            selectedItems.delete(index);
+          }
+          updateCartCount();
+        });
+
+        const label = document.createElement('label');
+        label.htmlFor = checkbox.id;
+        label.textContent = item;
+        label.style.marginLeft = '10px';
+        label.style.cursor = 'pointer';
+
+        li.appendChild(checkbox);
+        li.appendChild(label);
+
+        cartList.appendChild(li);
+      });
+    }
+
+    cartSection.style.display = 'block';
+    document.getElementById('checkout').style.display = 'none';
+
+    updateCartCount();
+  }
+
+  function closeCart() {
+    document.getElementById('cart').style.display = 'none';
+  }
+
+  function buyNow() {
+    if (selectedItems.size === 0) {
+      alert("Please select at least one product to buy.");
+      return;
+    }
+
+    const itemsToBuy = [...selectedItems].map(index => cartItems[index]);
+    window.itemsToBuy = itemsToBuy;
+
+    document.getElementById('cart').style.display = 'none';
+    document.getElementById('checkout').style.display = 'block';
+  }
+
+  document.getElementById('checkout-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('full-name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const address = document.getElementById('address').value.trim();
+
+    if (!name || !email || !address) {
+      alert('Please fill in all the fields.');
+      return;
+    }
+
+    if (!window.itemsToBuy || window.itemsToBuy.length === 0) {
+      alert('No items selected for purchase.');
+      return;
+    }
+
+    alert(`Thank you, ${name}! Your order for:\n- ${window.itemsToBuy.join('\n- ')}\nhas been placed.\nWe will ship to:\n${address}\nA confirmation email will be sent to ${email}.`);
+
+    cartItems = cartItems.filter((_, index) => !selectedItems.has(index));
+    selectedItems.clear();
+
+    updateCartCount();
+    document.getElementById('checkout-form').reset();
+
+    document.getElementById('checkout').style.display = 'none';
+    showCart();
+  });
+
+  function cancelCheckout() {
+    document.getElementById('checkout').style.display = 'none';
+    showCart();
   }
 </script>
 
