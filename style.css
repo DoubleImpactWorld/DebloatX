@@ -20,8 +20,11 @@ body, h1, h2, h3, h4, h5, h6, p, a, li, ul, span, div, button {
 .nav-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 30px; /* Added horizontal padding to nav container */
-    box-sizing: border-box; /* Ensure padding is included in width */
+    padding: 0 30px; /* Horizontal padding */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between; /* Spread nav and cart */
+    align-items: center;
 }
 
 .nav-list {
@@ -48,6 +51,35 @@ body, h1, h2, h3, h4, h5, h6, p, a, li, ul, span, div, button {
 
 .nav-list a:hover {
     color: #ccc;
+}
+
+/* ─── Cart Button ───────────────────────────────────────────── */
+
+.cart-button {
+    position: relative;
+}
+
+.cart-icon {
+    font-size: 24px;
+    color: white;
+    transition: color 0.2s ease;
+}
+
+.cart-icon:hover {
+    color: #ccc;
+}
+
+#cart-count {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
 }
 
 /* ─── Hero Section ───────────────────────────────────────────────────────── */
