@@ -9,123 +9,41 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-    /* ======= Updated Cart Section Styles ======= */
+    /* Added simple style for cart */
     .cart-section {
       position: fixed;
-      top: 70px;
-      right: 30px;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
-      padding: 24px 28px;
-      width: 360px;
-      max-height: 480px;
+      top: 60px;
+      right: 20px;
+      background: black;
+      border: 1px solid #ddd;
+      padding: 20px;
+      width: 300px;
+      max-height: 400px;
       overflow-y: auto;
-      z-index: 9999;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      z-index: 999;
       display: none;
-      font-family: 'Poppins', sans-serif;
-      transition: all 0.3s ease-in-out;
-      border: 1px solid #eee;
     }
-
-    @media (max-width: 480px) {
-      .cart-section {
-        width: 90%;
-        right: 5%;
-        top: 60px;
-        padding: 20px;
-      }
-    }
-
     .cart-section h2 {
       margin-top: 0;
-      margin-bottom: 20px;
-      color: #111;
-      font-weight: 700;
-      font-size: 1.8rem;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 10px;
     }
-
-    #cart-items {
+    .cart-section ul {
       list-style: none;
       padding: 0;
-      margin: 0 0 24px 0;
+      margin: 0 0 10px 0;
     }
-
-    #cart-items li {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 0;
+    .cart-section li {
+      padding: 5px 0;
       border-bottom: 1px solid #eee;
-      font-weight: 500;
-      font-size: 1rem;
-      color: #222;
     }
-
-    #cart-items li span {
-      flex: 1;
-      margin-left: 10px;
-      user-select: none;
-    }
-
-    #cart-items li input[type="checkbox"] {
-      transform: scale(1.3);
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-
-    .remove-btn {
-      background: none;
-      border: none;
-      color: #888;
-      font-size: 0.9rem;
-      cursor: pointer;
-      margin-left: 12px;
-      transition: color 0.3s ease;
-      flex-shrink: 0;
-    }
-
-    .remove-btn:hover {
-      color: #ff4444;
-    }
-
     .cart-section button {
       cursor: pointer;
-      background-color: #111;
+      background-color: #333;
       color: white;
       border: none;
-      padding: 14px 20px;
+      padding: 8px 12px;
       font-weight: 600;
-      border-radius: 10px;
-      width: 100%;
-      font-size: 1rem;
-      transition: background-color 0.25s ease;
-      margin-top: 8px;
-    }
-
-    #checkout-btn:disabled {
-      background-color: #555;
-      cursor: not-allowed;
-    }
-
-    #checkout-btn:not(:disabled):hover {
-      background-color: #333;
-    }
-
-    .cart-section button#close-cart-btn {
-      background: #777;
-      margin-top: 12px;
-    }
-
-    .cart-section::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    .cart-section::-webkit-scrollbar-thumb {
-      background-color: rgba(0, 0, 0, 0.2);
-      border-radius: 4px;
+      border-radius: 3px;
     }
   </style>
 </head>
@@ -148,13 +66,13 @@
   </div>
 </header>
 
-<!-- Updated Cart Section -->
-<section id="cart" class="cart-section" aria-label="Shopping Cart">
+<!-- Cart Section -->
+<section id="cart" class="cart-section">
   <h2>Your Cart</h2>
   <ul id="cart-items">
     <li>Your cart is empty.</li>
   </ul>
-  <!-- Buttons will be added dynamically by JS -->
+  <button onclick="closeCart()">Close Cart</button>
 </section>
 
 <section class="hero">
@@ -223,12 +141,6 @@
     document.getElementById('cart-count').innerText = cartItems.length;
   }
 
-  function removeFromCart(index) {
-    cartItems.splice(index, 1);
-    updateCartCount();
-    showCart();
-  }
-
   function showCart() {
     const cartSection = document.getElementById('cart');
     const cartList = document.getElementById('cart-items');
@@ -236,90 +148,14 @@
 
     if (cartItems.length === 0) {
       cartList.innerHTML = '<li>Your cart is empty.</li>';
-      removeCartButtons();
     } else {
-      cartItems.forEach((item, index) => {
+      cartItems.forEach(item => {
         const li = document.createElement('li');
-        li.innerHTML = `
-          <input type="checkbox" id="select-${index}" data-index="${index}" onchange="toggleCheckoutButton()" />
-          <span>${item}</span>
-          <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
-        `;
+        li.textContent = item;
         cartList.appendChild(li);
       });
-      addCartButtons();
     }
-
     cartSection.style.display = 'block';
-  }
-
-  function addCartButtons() {
-    const cartSection = document.getElementById('cart');
-
-    // Add Checkout button if missing
-    if (!document.getElementById('checkout-btn')) {
-      const checkoutBtn = document.createElement('button');
-      checkoutBtn.id = 'checkout-btn';
-      checkoutBtn.textContent = 'Checkout';
-      checkoutBtn.disabled = true;
-      checkoutBtn.onclick = checkoutSelected;
-      cartSection.appendChild(checkoutBtn);
-    }
-
-    // Add Close Cart button if missing
-    if (!document.getElementById('close-cart-btn')) {
-      const closeBtn = document.createElement('button');
-      closeBtn.id = 'close-cart-btn';
-      closeBtn.textContent = 'Close Cart';
-      closeBtn.onclick = closeCart;
-      cartSection.appendChild(closeBtn);
-    }
-  }
-
-  function removeCartButtons() {
-    const checkoutBtn = document.getElementById('checkout-btn');
-    const closeBtn = document.getElementById('close-cart-btn');
-
-    if (checkoutBtn) checkoutBtn.remove();
-    if (closeBtn) closeBtn.remove();
-  }
-
-  function toggleCheckoutButton() {
-    const checkboxes = document.querySelectorAll('#cart-items input[type="checkbox"]');
-    const checkoutBtn = document.getElementById('checkout-btn');
-
-    const isAnyChecked = Array.from(checkboxes).some(cb => cb.checked);
-
-    if (checkoutBtn) checkoutBtn.disabled = !isAnyChecked;
-  }
-
-  function checkoutSelected() {
-    const checkboxes = document.querySelectorAll('#cart-items input[type="checkbox"]');
-    const selectedItems = [];
-
-    checkboxes.forEach(cb => {
-      if (cb.checked) {
-        const idx = parseInt(cb.getAttribute('data-index'), 10);
-        selectedItems.push(cartItems[idx]);
-      }
-    });
-
-    if (selectedItems.length === 0) {
-      alert('Please select at least one item to checkout.');
-      return;
-    }
-
-    alert('Checking out the following items:\n' + selectedItems.join('\n'));
-
-    // Remove checked items from cart (last to first)
-    for (let i = cartItems.length - 1; i >= 0; i--) {
-      if (checkboxes[i].checked) {
-        cartItems.splice(i, 1);
-      }
-    }
-
-    updateCartCount();
-    showCart();
   }
 
   function closeCart() {
