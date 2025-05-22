@@ -3,19 +3,28 @@ body {
     margin: 0;
     padding: 0;
     background: url('lol.png') center center / cover no-repeat fixed;
-    font-family: 'Poppins', sans-serif;
-    color: white;
+  /* Apply Poppins and enforce white text globally */
+body, h1, h2, h3, h4, h5, h6, p, a, li, ul, span, div, button {
+    font-family: 'Poppins', sans-serif !important;
+    color: white !important;
 }
 
-/* ─── Top Navigation Bar ───────────────────────────────────────────────────── */
-.navbar {
+/* ─── Top Navigation Bar (Translucent Pane) ───────────────────────────────── */
+.site-header {
     background-color: rgba(0, 0, 0, 0.8);
     padding: 15px 0;
     position: relative;
     z-index: 1000;
 }
 
-.navbar ul {
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 30px; /* Added horizontal padding to nav container */
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+.nav-list {
     list-style: none;
     display: flex;
     justify-content: center;
@@ -24,11 +33,11 @@ body {
     margin: 0;
 }
 
-.navbar li {
+.nav-list li {
     margin: 0 20px;
 }
 
-.navbar a {
+.nav-list a {
     color: white;
     text-decoration: none;
     font-family: 'Playfair Display', serif;
@@ -37,64 +46,118 @@ body {
     transition: color 0.2s ease;
 }
 
-.navbar a:hover {
+.nav-list a:hover {
     color: #ccc;
 }
 
-/* ─── Section Containers ───────────────────────────────────────────────────── */
+/* ─── Hero Section ───────────────────────────────────────────────────────── */
+.hero {
+    min-height: 95vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* Removed padding here as the overlay-text will handle it */
+    box-sizing: border-box;
+    /* To make it cover full width horizontally */
+    width: 100%;
+}
+
+.overlay-text {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 80px 100px;
+    border-radius: 0px; /* Removed border-radius to ensure sharp edges to the sides */
+    max-width: none; /* Removed max-width */
+    width: 100%; /* Make it take full width of its parent */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+h1 {
+    font-size: 5.5rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+h1 + p {
+    font-size: 2.5rem;
+    margin-top: 15px;
+}
+
+/* ─── Content Sections ────────────────────────────────────────────────────── */
 section {
-    padding: 0;
+    padding: 0; /* Removed padding here, overlay-section will handle it */
     text-align: center;
     position: relative;
     z-index: 1;
+    /* To make it cover full width horizontally */
     width: 100%;
-    margin-top: -1px;
+    margin-top: -1px; /* Small negative margin to prevent tiny gaps between sections */
 }
 
 .overlay-section {
     background-color: rgba(0, 0, 0, 0.5);
     margin: 0 auto;
-    padding: 100px 10%;
-    border-radius: 0;
-    width: 100%;
-    box-sizing: border-box;
+    padding: 100px 10%; /* Increased padding for height, used percentage for width responsiveness */
+    border-radius: 0px; /* Removed border-radius for sharp edges */
+    max-width: none; /* Removed max-width */
+    width: 100%; /* Make it take full width */
+    box-sizing: border-box; /* Include padding in width */
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.section-title h2 {
+.why-us h2,
+.coming-soon h2,
+.best-sellers h2 {
     font-size: 3.8rem;
     font-weight: 700;
     margin-bottom: 30px;
 }
 
-/* ─── Best Sellers Section ─────────────────────────────────────────────────── */
+.why-us ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1.5rem;
+    line-height: 2.2rem;
+}
+
+.why-us li {
+    margin: 15px 0;
+}
+
+.coming-soon p {
+    font-size: 1.8rem;
+    margin-top: 15px;
+}
+
+/* ─── Best Sellers Section (Backdrop Between Products) ────────────────────── */
 .best-sellers {
-    background-color: rgba(0, 0, 0, 0.6);
     padding: 100px 30px;
-    width: 100%;
-    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.6); /* Dark semi-transparent background for the whole section */
+    width: 100%; /* Ensure full width */
+    box-sizing: border-box; /* Include padding in width */
 }
 
 .best-sellers .overlay-section {
     max-width: 1200px;
-    padding: 0;
-    margin: 0 auto;
+    padding: 0; /* Remove padding from the overlay-section */
+    margin: 0 auto; /* Center the container */
 }
 
 .best-sellers-grid {
     display: flex;
     flex-direction: column;
-    gap: 80px;
+    gap: 80px; /* Gap where the backdrop will show */
     margin-top: 40px;
     align-items: center;
-    padding: 60px 80px;
+    background-color: transparent; /* Make the grid container transparent */
+    padding: 60px 80px; /* Add padding around the grid for spacing within the full-width section */
     box-sizing: border-box;
 }
 
 .best-seller-item {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.8); /* Slightly more opaque background for the items */
     padding: 50px;
     border-radius: 15px;
     text-align: center;
@@ -134,46 +197,6 @@ section {
     flex-grow: 1;
 }
 
-/* ─── Services Section ─────────────────────────────────────────────────────── */
-.service-item {
-    margin: 40px 0;
-    text-align: center;
-}
-
-.service-item i {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    display: block;
-}
-
-.service-item h3 {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-}
-
-.service-item p {
-    font-size: 1.5rem;
-    line-height: 1.8;
-}
-
-/* ─── Call to Action ───────────────────────────────────────────────────────── */
-.cta-section {
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 80px 20px;
-    text-align: center;
-}
-
-.cta-section h2 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-
-.cta-section p {
-    font-size: 1.6rem;
-    margin-bottom: 30px;
-}
-
-/* ─── Buttons ─────────────────────────────────────────────────────────────── */
 .button {
     display: inline-block;
     padding: 18px 35px;
@@ -182,6 +205,7 @@ section {
     text-decoration: none;
     border-radius: 10px;
     transition: background-color 0.2s ease, transform 0.2s ease;
+    align-self: center;
     font-size: 1.3rem;
     font-weight: 600;
 }
@@ -192,43 +216,49 @@ section {
 }
 
 /* ─── Footer ──────────────────────────────────────────────────────────────── */
-.footer {
+footer {
     background-color: #111;
-    padding: 40px 0;
+    padding: 40px 0; /* Adjusted padding to extend full width */
     text-align: center;
     border-top: 1px solid #333;
     font-family: sans-serif;
+    position: relative;
     z-index: 1;
-    width: 100%;
-    box-sizing: border-box;
+    width: 100%; /* Make it full width */
+    box-sizing: border-box; /* Include padding in width */
 }
 
-.footer-links {
-    margin-bottom: 15px;
-}
-
-.footer-links a {
-    margin: 0 15px;
-    color: #aaa;
-    text-decoration: none;
-    font-size: 1rem;
-}
-
-.footer-links a:hover {
-    color: #fff;
-}
-
-.footer p {
+footer p {
     font-size: 1em;
     color: #aaa;
     margin-top: 10px;
 }
 
-/* ─── Responsive Media Queries ─────────────────────────────────────────────── */
+/* ─── Responsive Adjustments ──────────────────────────────────────────────── */
 @media (max-width: 1200px) {
-    .overlay-section {
-        padding: 80px 5%;
+    /* Keep nav-container max-width for internal content */
+    .nav-container {
+        max-width: 90%;
+        padding: 0 20px; /* Adjust padding for nav */
     }
+    .overlay-text {
+        padding: 60px 80px;
+    }
+    h1 {
+        font-size: 4.5rem;
+    }
+    h1 + p {
+        font-size: 2rem;
+    }
+    .overlay-section {
+        padding: 80px 5%; /* Adjust percentage padding for wider screens */
+    }
+    .why-us h2,
+    .coming-soon h2,
+    .best-sellers h2 {
+        font-size: 3.2rem;
+    }
+    /* Best Sellers Grid internal content max-width */
     .best-sellers-grid {
         max-width: 900px;
     }
@@ -248,8 +278,22 @@ section {
 }
 
 @media (max-width: 992px) {
+    .overlay-text {
+        padding: 50px 60px;
+    }
+    h1 {
+        font-size: 4rem;
+    }
+    h1 + p {
+        font-size: 1.8rem;
+    }
     .overlay-section {
-        padding: 60px 5%;
+        padding: 60px 5%; /* Continue using percentage padding */
+    }
+    .why-us h2,
+    .coming-soon h2,
+    .best-sellers h2 {
+        font-size: 2.8rem;
     }
     .best-sellers-grid {
         max-width: 700px;
@@ -270,6 +314,23 @@ section {
 }
 
 @media (max-width: 768px) {
+    .hero {
+        min-height: 70vh;
+    }
+    .overlay-text {
+        padding: 30px 40px;
+    }
+    h1 {
+        font-size: 3.5rem;
+    }
+    h1 + p {
+        font-size: 1.5rem;
+    }
+    .why-us h2,
+    .coming-soon h2,
+    .best-sellers h2 {
+        font-size: 2.5rem;
+    }
     .overlay-section {
         padding: 40px 5%;
     }
@@ -293,21 +354,38 @@ section {
         padding: 12px 25px;
         font-size: 1.1rem;
     }
-    .navbar ul {
+    .nav-list {
         flex-wrap: wrap;
         justify-content: space-around;
     }
-    .navbar li {
+    .nav-list li {
         margin: 5px 10px;
     }
 }
 
 @media (max-width: 480px) {
+    .hero {
+        min-height: 60vh;
+    }
+    .overlay-text {
+        padding: 20px 25px;
+    }
+    h1 {
+        font-size: 2.8rem;
+    }
+    h1 + p {
+        font-size: 1.2rem;
+    }
+    .why-us h2,
+    .coming-soon h2,
+    .best-sellers h2 {
+        font-size: 2rem;
+    }
     .overlay-section {
         padding: 30px 5%;
     }
     .best-sellers-grid {
-        max-width: 100%;
+        max-width: 100%; /* Allow full width on smallest screens */
         gap: 30px;
     }
     .best-seller-item {
