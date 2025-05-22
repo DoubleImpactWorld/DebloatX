@@ -353,7 +353,7 @@ footer p {
     }
 }
 
-/* ─── Cart Section Styling (Updated) ───────────────────────────────────────────── */
+/* ─── Cart Section Styling (Updated & Aesthetic) ───────────────────────────── */
 .cart-overlay {
   position: fixed;
   top: 60px;
@@ -371,6 +371,7 @@ footer p {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  display: none; /* Initially hidden */
 }
 
 .cart-overlay h2 {
@@ -405,22 +406,6 @@ footer p {
   text-align: left;
   margin-right: 10px;
   color: black;
-}
-
-.cart-item-quantity {
-  font-size: 1rem;
-  color: #555;
-  margin-right: 10px;
-  min-width: 30px;
-  text-align: center;
-}
-
-.cart-item-price {
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: black;
-  min-width: 60px;
-  text-align: right;
 }
 
 .cart-item-remove {
@@ -473,9 +458,6 @@ footer p {
     top: 70px;
   }
   .cart-item-name {
-    font-size: 1rem;
-  }
-  .cart-item-price {
     font-size: 1rem;
   }
 }
