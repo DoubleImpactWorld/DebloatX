@@ -110,7 +110,7 @@ section {
 .why-us h2,
 .coming-soon h2,
 .best-sellers h2 {
-    font-size: 3.8rem;
+    font-size: 3.0rem;
     font-weight: 700;
     margin-bottom: 30px;
 }
@@ -118,7 +118,7 @@ section {
 .why-us ul {
     list-style: none;
     padding: 0;
-    font-size: 1.5rem;
+    font-size: 1.0rem;
     line-height: 2.2rem;
 }
 
