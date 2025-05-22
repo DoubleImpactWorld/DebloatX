@@ -5,8 +5,9 @@ body {
     background: url('lol.png') center center / cover no-repeat fixed;
     /* Force global white text */
 body, h1, h2, h3, h4, h5, h6, p, a, li, ul, button, span {
-    color: white;
-    font-family: 'Poppins', sans-serif;
+  /* Force white text everywhere and apply Poppins */
+    color: white !important;
+    font-family: 'Poppins', sans-serif !important;
 }
 
 /* ─── Top Navigation Bar (Translucent Pane) ───────────────────────────────── */
