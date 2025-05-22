@@ -65,7 +65,7 @@ body, h1, h2, h3, h4, h5, h6, p, a, li, ul, span, div, button {
 
 .overlay-text {
     background-color: rgba(0, 0, 0, 0.6);
-    padding: 100px 100px;
+    padding: 0px 100px;
     border-radius: 0px; /* Removed border-radius to ensure sharp edges to the sides */
     max-width: none; /* Removed max-width */
     width: 100%; /* Make it take full width of its parent */
