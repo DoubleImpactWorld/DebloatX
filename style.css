@@ -147,14 +147,17 @@ section {
 
 .best-sellers-grid {
     display: flex;
-    flex-direction: column;
-    gap: 80px; /* Gap where the backdrop will show */
+    flex-direction: row;  /* Change this from column to row */
+    flex-wrap: wrap;      /* Allow wrapping to next line if needed */
+    gap: 40px 80px;       /* Adjust gaps (row-gap column-gap) */
     margin-top: 40px;
-    align-items: center;
-    background-color: transparent; /* Make the grid container transparent */
-    padding: 60px 80px; /* Add padding around the grid for spacing within the full-width section */
+    align-items: flex-start; /* Align items to the top */
+    justify-content: center; /* Center items horizontally */
+    background-color: transparent;
+    padding: 60px 80px;
     box-sizing: border-box;
 }
+
 
 .best-seller-item {
     background-color: rgba(0, 0, 0, 0.8); /* Slightly more opaque background for the items */
