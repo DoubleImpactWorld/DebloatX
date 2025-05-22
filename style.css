@@ -91,17 +91,22 @@ body, h1, h2, h3, h4, h5, h6, p, a, li, ul, span, div, button {
     justify-content: center;
     align-items: center;
     text-align: center;
+    /* Removed padding here as the overlay-text will handle it */
     box-sizing: border-box;
+    /* To make it cover full width horizontally */
     width: 100%;
+    
 }
 
 .overlay-text {
+    /* Smooth gradient black transparent background */
     background: linear-gradient(
         135deg,
         rgba(0, 0, 0, 0.8) 0%,
         rgba(0, 0, 0, 0.4) 50%,
         rgba(0, 0, 0, 0.8) 100%
     );
+
     padding: 80px 100px;
     border-radius: 0;
     max-width: none;
@@ -122,22 +127,23 @@ h1 + p {
 
 /* ─── Content Sections ────────────────────────────────────────────────────── */
 section {
-    padding: 0;
+    padding: 0; /* Removed padding here, overlay-section will handle it */
     text-align: center;
     position: relative;
     z-index: 1;
+    /* To make it cover full width horizontally */
     width: 100%;
-    margin-top: -1px;
+    margin-top: -1px; /* Small negative margin to prevent tiny gaps between sections */
 }
 
 .overlay-section {
     background-color: rgba(0, 0, 0, 0.5);
     margin: 0 auto;
-    padding: 100px 10%;
-    border-radius: 0px;
-    max-width: none;
-    width: 100%;
-    box-sizing: border-box;
+    padding: 100px 10%; /* Increased padding for height, used percentage for width responsiveness */
+    border-radius: 0px; /* Removed border-radius for sharp edges */
+    max-width: none; /* Removed max-width */
+    width: 100%; /* Make it take full width */
+    box-sizing: border-box; /* Include padding in width */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -170,12 +176,11 @@ section {
 /* ─── Best Sellers Section (Backdrop Between Products) ────────────────────── */
 .best-sellers {
     padding: 100px 30px;
-    background-color: rgba(0, 0, 0, 0.6);
-    width: 100%;
-    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.6); /* Dark semi-transparent background for the whole section */
+    width: 100%; /* Ensure full width */
+    box-sizing: border-box; /* Include padding in width */
 }
-
-/* Adjust spacing between Hero and Best Sellers */
+/* ─── Adjust spacing between Hero and Best Sellers ─────────────────────────── */
 .hero {
     margin-bottom: 0;
 }
@@ -189,7 +194,7 @@ section {
 
 .best-sellers .overlay-section {
     max-width: 1200px;
-    padding: 0;
+    padding: 0; /* already no padding */
     margin: 0 auto;
 }
 
@@ -197,7 +202,7 @@ section {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 40px 60px;
+    gap: 40px 60px; /* Adjust spacing between items */
     margin-top: 40px;
     align-items: flex-start;
     justify-content: center;
@@ -209,7 +214,7 @@ section {
 .best-seller-item button {
     background-color: #666;
     color: white;
-    border: none;
+    border: none;             /* Remove default border */
     padding: 14px 28px;
     border-radius: 10px;
     font-size: 1.2rem;
@@ -244,11 +249,11 @@ section {
 }
 
 .button {
-    background-color: transparent !important;
+    background-color: transparent !important; /* fully transparent */
     padding: 14px 28px;
     margin: 0;
     border: none;
-    box-shadow: none !important;
+    box-shadow: none !important; /* remove any shadow */
     color: white !important;
     text-decoration: none;
     border-radius: 10px;
@@ -260,20 +265,20 @@ section {
 .button:hover {
     background-color: transparent !important;
     transform: translateY(-3px);
-    box-shadow: none !important;
+    box-shadow: none !important; /* prevent shadow on hover */
 }
 
 /* ─── Footer ──────────────────────────────────────────────────────────────── */
 footer {
     background-color: #111;
-    padding: 40px 0;
+    padding: 40px 0; /* Adjusted padding to extend full width */
     text-align: center;
     border-top: 1px solid #333;
     font-family: sans-serif;
     position: relative;
     z-index: 1;
-    width: 100%;
-    box-sizing: border-box;
+    width: 100%; /* Make it full width */
+    box-sizing: border-box; /* Include padding in width */
 }
 
 footer p {
@@ -284,9 +289,10 @@ footer p {
 
 /* ─── Responsive Adjustments ──────────────────────────────────────────────── */
 @media (max-width: 1200px) {
+    /* Keep nav-container max-width for internal content */
     .nav-container {
         max-width: 90%;
-        padding: 0 20px;
+        padding: 0 20px; /* Adjust padding for nav */
     }
     .overlay-text {
         padding: 60px 80px;
@@ -298,13 +304,14 @@ footer p {
         font-size: 2rem;
     }
     .overlay-section {
-        padding: 80px 5%;
+        padding: 80px 5%; /* Adjust percentage padding for wider screens */
     }
     .why-us h2,
     .coming-soon h2,
     .best-sellers h2 {
         font-size: 3.2rem;
     }
+    /* Best Sellers Grid internal content max-width */
     .best-sellers-grid {
         max-width: 900px;
     }
@@ -334,7 +341,7 @@ footer p {
         font-size: 1.8rem;
     }
     .overlay-section {
-        padding: 60px 5%;
+        padding: 60px 5%; /* Continue using percentage padding */
     }
     .why-us h2,
     .coming-soon h2,
@@ -353,38 +360,55 @@ footer p {
     }
 }
 
+/* ─── Button Transparent Background Snippet ───────────────────────────────── */
+.button {
+    background-color: transparent !important;
+    padding: 14px 28px;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: transform 0.2s ease;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.button:hover {
+    background-color: transparent !important;
+    transform: translateY(-3px);
+}
+
 /* ─── Cart Section Styling ───────────────────────────────────────────── */
 
 .cart-overlay {
   position: fixed;
   top: 60px; /* below header */
   right: 20px;
-  width: 360px;
+  width: 350px;
   max-height: 80vh;
-  background: linear-gradient(145deg, #1e1e1e, #121212);
-  box-shadow:
-    0 4px 15px rgba(0, 0, 0, 0.6),
-    inset 0 0 10px rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  padding: 28px 24px;
+  background-color: rgba(0, 0, 0, 0.85);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.8);
+  border-radius: 12px;
+  padding: 24px 20px;
   overflow-y: auto;
   z-index: 1100;
   font-family: 'Poppins', sans-serif;
-  color: #eee;
+  color: white;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  gap: 18px;
 }
 
 .cart-overlay h2 {
+  color: white;  /* <-- FIXED COLOR HERE */
   font-family: 'Playfair Display', serif;
   font-weight: 700;
-  font-size: 2rem;
-  margin-bottom: 16px;
-  border-bottom: 2px solid #444;
-  padding-bottom: 10px;
-  color: #f0f0f0;
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #555;
+  padding-bottom: 8px;
 }
 
 .cart-item {
@@ -392,10 +416,8 @@ footer p {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #333;
-  padding: 14px 0;
-  margin-bottom: 14px;
-  transition: background-color 0.2s ease;
-  border-radius: 8px;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
 }
 
 .cart-item:last-child {
@@ -404,88 +426,70 @@ footer p {
   padding-bottom: 0;
 }
 
-.cart-item:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
 .cart-item-name {
-  color: #ddd !important;
+  color: black !important; /* your request */
   font-weight: 600;
   flex: 1 1 auto;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   text-align: left;
-  margin-right: 12px;
+  margin-right: 10px;
 }
 
 .cart-item-quantity {
-  font-size: 1.1rem;
-  color: #aaa;
-  margin-right: 12px;
-  min-width: 32px;
+  font-size: 1rem;
+  color: #ccc;
+  margin-right: 10px;
+  min-width: 30px;
   text-align: center;
-  font-weight: 500;
 }
 
 .cart-item-price {
   font-weight: 700;
-  font-size: 1.15rem;
-  color: #f8f8f8;
-  min-width: 70px;
+  font-size: 1.1rem;
+  color: white;
+  min-width: 60px;
   text-align: right;
 }
 
 .cart-item-remove {
   background: transparent;
   border: none;
-  color: #ff6b6b;
+  color: #ff4d4d;
   cursor: pointer;
   font-weight: 700;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   transition: color 0.2s ease;
 }
 
 .cart-item-remove:hover {
-  color: #ff3b3b;
+  color: #ff1a1a;
 }
 
 .cart-total {
   margin-top: auto;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
   text-align: right;
-  border-top: 2px solid #444;
-  padding-top: 14px;
-  color: #f0f0f0;
+  border-top: 1px solid #555;
+  padding-top: 12px;
 }
 
 .cart-checkout-btn {
-  margin-top: 22px;
-  padding: 16px;
-  background-color: #3a3a3a;
+  margin-top: 16px;
+  padding: 14px;
+  background-color: #666;
   border: none;
-  border-radius: 14px;
+  border-radius: 10px;
   color: white;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.3s ease;
   width: 100%;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
 
 .cart-checkout-btn:hover {
-  background-color: #555;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-}
-
-/* Empty cart placeholder style */
-.cart-empty {
-  font-style: italic;
-  color: #777;
-  font-size: 1.25rem;
-  padding: 20px 0;
-  text-align: center;
-  user-select: none;
+  background-color: #888;
 }
 
 /* Responsive for smaller screens */
@@ -494,16 +498,11 @@ footer p {
     width: 90vw;
     right: 5vw;
     top: 70px;
-    padding: 20px 16px;
   }
   .cart-item-name {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
   .cart-item-price {
-    font-size: 1.1rem;
-  }
-  .cart-checkout-btn {
-    font-size: 1.1rem;
-    padding: 14px;
+    font-size: 1rem;
   }
 }
