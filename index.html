@@ -1,349 +1,386 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Y2K Style Store</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f0f0f0;
-      margin: 0;
-      padding: 20px;
-      color: #444;
+/* ─── Global & Background ─────────────────────────────────────────────────── */
+body {
+    margin: 0;
+    padding: 0;
+    background: url('45d33a56-e609-4743-9929-0f7f5fe4413b.png') center center / cover no-repeat fixed;
+  /* Apply Poppins and enforce white text globally */
+}
+body, h1, h2, h3, h4, h5, h6, p, a, li, ul, span, div, button {
+    font-family: 'Poppins', sans-serif !important;
+    color: white !important;
+}
+
+/* ─── Top Navigation Bar (Translucent Pane) ───────────────────────────────── */
+.site-header {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 15px 0;
+    position: relative;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 30px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0 auto;
+    flex: 1;
+}
+
+
+.nav-list li {
+    margin: 0 20px;
+}
+
+.nav-list a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    transition: color 0.2s ease;
+}
+
+.nav-list a:hover {
+    color: #ccc;
+}
+
+/* ─── Cart Button ───────────────────────────────────────────── */
+
+.cart-button {
+    position: relative;
+}
+
+.cart-icon {
+    font-size: 24px;
+    color: white;
+    transition: color 0.2s ease;
+}
+
+.cart-icon:hover {
+    color: #ccc;
+}
+
+#cart-count {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
+
+/* ─── Hero Section ───────────────────────────────────────────────────────── */
+.hero {
+    min-height: 95vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* Removed padding here as the overlay-text will handle it */
+    box-sizing: border-box;
+    /* To make it cover full width horizontally */
+    width: 100%;
+    
+}
+
+.overlay-text {
+    /* Smooth gradient black transparent background */
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 0, 0, 0.8) 100%
+    );
+
+    padding: 80px 100px;
+    border-radius: 0;
+    max-width: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+h1 {
+    font-size: 5.5rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+h1 + p {
+    font-size: 2.5rem;
+    margin-top: 15px;
+}
+
+/* ─── Content Sections ────────────────────────────────────────────────────── */
+section {
+    padding: 0; /* Removed padding here, overlay-section will handle it */
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    /* To make it cover full width horizontally */
+    width: 100%;
+    margin-top: -1px; /* Small negative margin to prevent tiny gaps between sections */
+}
+
+.overlay-section {
+    background-color: rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+    padding: 100px 10%; /* Increased padding for height, used percentage for width responsiveness */
+    border-radius: 0px; /* Removed border-radius for sharp edges */
+    max-width: none; /* Removed max-width */
+    width: 100%; /* Make it take full width */
+    box-sizing: border-box; /* Include padding in width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.why-us h2,
+.coming-soon h2,
+.best-sellers h2 {
+    font-size: 2.0rem;
+    font-weight: 700;
+    margin-bottom: 26px;
+}
+
+.why-us ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1.5rem;
+    line-height: 1.0rem;
+}
+
+.why-us li {
+    margin: 15px 0;
+}
+
+.coming-soon p {
+    font-size: 1.8rem;
+    margin-top: 15px;
+}
+
+/* ─── Best Sellers Section (Backdrop Between Products) ────────────────────── */
+.best-sellers {
+    padding: 100px 30px;
+    background-color: rgba(0, 0, 0, 0.6); /* Dark semi-transparent background for the whole section */
+    width: 100%; /* Ensure full width */
+    box-sizing: border-box; /* Include padding in width */
+}
+    /* ─── Adjust spacing between Hero and Best Sellers ─────────────────────────── */
+.hero {
+    margin-bottom: 0;
+}
+
+.best-sellers {
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.best-sellers .overlay-section {
+    max-width: 1200px;
+    padding: 0; /* already no padding */
+    margin: 0 auto;
+}
+
+
+.best-sellers-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px 60px; /* Adjust spacing between items */
+    margin-top: 40px;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: transparent;
+    padding: 60px 80px;
+    box-sizing: border-box;
+}
+
+.best-seller-item button {
+    background-color: #666;
+    color: white;
+    border: none;             /* Remove default border */
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.best-seller-item button:hover {
+    background-color: #888;
+    transform: translateY(-3px);
+}
+
+
+.best-seller-item img {
+    max-width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.best-seller-item h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.best-seller-item p {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.button {
+    background-color: transparent !important; /* fully transparent */
+    padding: 14px 28px;
+    margin: 0;
+    border: none;
+    box-shadow: none !important; /* remove any shadow */
+    color: white !important;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: transform 0.2s ease;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.button:hover {
+    background-color: transparent !important;
+    transform: translateY(-3px);
+    box-shadow: none !important; /* prevent shadow on hover */
+}
+
+
+/* ─── Footer ──────────────────────────────────────────────────────────────── */
+footer {
+    background-color: #111;
+    padding: 40px 0; /* Adjusted padding to extend full width */
+    text-align: center;
+    border-top: 1px solid #333;
+    font-family: sans-serif;
+    position: relative;
+    z-index: 1;
+    width: 100%; /* Make it full width */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+footer p {
+    font-size: 1em;
+    color: #aaa;
+    margin-top: 10px;
+}
+
+/* ─── Responsive Adjustments ──────────────────────────────────────────────── */
+@media (max-width: 1200px) {
+    /* Keep nav-container max-width for internal content */
+    .nav-container {
+        max-width: 90%;
+        padding: 0 20px; /* Adjust padding for nav */
     }
-    h1, h2 {
-      text-align: center;
-      color: #222;
+    .overlay-text {
+        padding: 60px 80px;
     }
-    .best-sellers {
-      display: flex;
-      gap: 30px;
-      justify-content: center;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
+    h1 {
+        font-size: 4.5rem;
+    }
+    h1 + p {
+        font-size: 2rem;
+    }
+    .overlay-section {
+        padding: 80px 5%; /* Adjust percentage padding for wider screens */
+    }
+    .why-us h2,
+    .coming-soon h2,
+    .best-sellers h2 {
+        font-size: 3.2rem;
+    }
+    /* Best Sellers Grid internal content max-width */
+    .best-sellers-grid {
+        max-width: 900px;
     }
     .best-seller-item {
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      padding: 20px;
-      width: 280px;
-      text-align: center;
-      cursor: default;
-      transition: transform 0.15s ease-in-out;
-    }
-    .best-seller-item:hover {
-      transform: scale(1.03);
+        max-width: 90%;
+        padding: 40px;
     }
     .best-seller-item img {
-      max-width: 100%;
-      border-radius: 10px;
-      margin-bottom: 15px;
+        height: 450px;
     }
     .best-seller-item h3 {
-      margin: 0 0 10px;
-      font-size: 1.25rem;
-      color: #222;
+        font-size: 3rem;
     }
     .best-seller-item p {
-      margin: 0 0 10px;
-      font-size: 1rem;
-      color: #666;
+        font-size: 1.5rem;
     }
-    .best-seller-item .price {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 20px;
-      color: #888;
+}
+
+@media (max-width: 992px) {
+    .overlay-text {
+        padding: 50px 60px;
     }
-    .best-seller-item button {
-      background-color: #ff6f61;
-      border: none;
-      padding: 12px 20px;
-      font-size: 1rem;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
+    h1 {
+        font-size: 4rem;
     }
-    .best-seller-item button:hover:not(:disabled) {
-      background-color: #e65b50;
+    h1 + p {
+        font-size: 1.8rem;
     }
-    .best-seller-item button:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
+    .overlay-section {
+        padding: 60px 5%; /* Continue using percentage padding */
     }
-    #cart {
-      background: #fff;
-      border-radius: 10px;
-      padding: 20px;
-      max-width: 500px;
-      margin: 0 auto 30px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      display: none;
+    .why-us h2,
+    .coming-soon h2,
+    .best-sellers h2 {
+        font-size: 2.8rem;
     }
-    #cart h2 {
-      margin-top: 0;
+    .best-sellers-grid {
+        max-width: 700px;
     }
-    #cart-items {
-      list-style: none;
-      padding: 0;
-      margin: 20px 0;
-      max-height: 200px;
-      overflow-y: auto;
+    .best-seller-item {
+        max-width: 95%;
+        padding: 35px;
     }
-    #cart-items li {
-      margin-bottom: 10px;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
+    .best-seller-item img {
+        height: 350px;
     }
-    #cart-items input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      cursor: pointer;
-    }
-    #buy-now-btn {
-      background-color: #0077cc;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      font-size: 1.1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-      width: 100%;
-    }
-    #buy-now-btn:disabled {
-      background-color: #aaa;
-      cursor: not-allowed;
-    }
-    #buy-now-btn:hover:not(:disabled) {
-      background-color: #005fa3;
-    }
-    #checkout {
-      background: #fff;
-      border-radius: 10px;
-      padding: 20px;
-      max-width: 500px;
-      margin: 0 auto;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      display: none;
-    }
-    #checkout h2 {
-      margin-top: 0;
-    }
-    #checkout-form label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-    }
-    #checkout-form input, #checkout-form textarea {
-      width: 100%;
-      padding: 8px 10px;
-      margin-bottom: 15px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
-    #checkout-form textarea {
-      resize: vertical;
-      height: 80px;
-    }
-    #checkout-form button {
-      background-color: #28a745;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      font-size: 1.1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-right: 10px;
-      transition: background-color 0.2s ease;
-    }
-    #checkout-form button:hover {
-      background-color: #218838;
-    }
-    #cancel-btn {
-      background-color: #dc3545;
-      padding: 12px 25px;
-      font-size: 1.1rem;
-      border-radius: 5px;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-    }
-    #cancel-btn:hover {
-      background-color: #c82333;
-    }
-  </style>
-</head>
-<body>
+}
 
-  <h1>Our Best Sellers</h1>
+/* ─── Button Transparent Background Snippet ───────────────────────────────── */
+.button {
+    background-color: transparent !important;
+    padding: 14px 28px;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: transform 0.2s ease;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
 
-  <section class="best-sellers">
-    <div class="best-seller-item">
-      <img src="pant1.png" alt="Baggy Y2k Star Jeans" />
-      <h3>Baggy Y2k Star Jeans</h3>
-      <p>Flashy stars and nostalgic vibes bring back the era’s iconic aesthetic.</p>
-      <p class="price">3500₹</p>
-      <button onclick="addToCart('Baggy Y2k Star Jeans', 79.99); event.stopPropagation();">Add to Cart</button>
-    </div>
-
-    <div class="best-seller-item">
-      <img src="shoe1.png" alt="Nike SB Force 58" />
-      <h3>Nike SB Force 58</h3>
-      <p>The latest and greatest innovation to hit the streets, the Nike SB Force 58 gives you the durability of a cupsole with the flexibility of a vulcanised shoe.</p>
-      <p class="price">6399₹</p>
-      <button onclick="addToCart('Nike SB Force 58', 120.00); event.stopPropagation();">Add to Cart</button>
-    </div>
-
-    <div class="best-seller-item">
-      <img src="watch1.png" alt="Sonata Quartz Green Dial Watch" />
-      <h3>Sonata Quartz Green Dial Watch</h3>
-      <p>The striking green dial, complemented by the luxurious golden stainless steel strap, offers a perfect blend of sophistication and masculinity.</p>
-      <p class="price">4000₹</p>
-      <button onclick="addToCart('Sonata Quartz Green Dial Watch', 150.50); event.stopPropagation();">Add to Cart</button>
-    </div>
-  </section>
-
-  <section id="cart">
-    <h2>Your Cart (<span id="cart-count">0</span>)</h2>
-    <ul id="cart-items"></ul>
-    <button id="buy-now-btn" disabled onclick="buyNow()">Buy Now</button>
-  </section>
-
-  <section id="checkout">
-    <h2>Checkout</h2>
-    <form id="checkout-form">
-      <label for="full-name">Full Name</label>
-      <input type="text" id="full-name" required />
-
-      <label for="email">Email Address</label>
-      <input type="email" id="email" required />
-
-      <label for="address">Shipping Address</label>
-      <textarea id="address" required></textarea>
-
-      <button type="submit">Confirm Order</button>
-      <button type="button" id="cancel-btn" onclick="cancelCheckout()">Cancel</button>
-    </form>
-  </section>
-
-  <script>
-    let cartItems = []; // array of {name, price}
-    let selectedItems = new Set();
-
-    function addToCart(productName, price) {
-      cartItems.push({ name: productName, price: price });
-      selectedItems.add(cartItems.length - 1);
-      updateCartCount();
-      showCart();
-    }
-
-    function showCart() {
-      const cartSection = document.getElementById('cart');
-      const cartList = document.getElementById('cart-items');
-      cartList.innerHTML = '';
-
-      if (cartItems.length === 0) {
-        cartList.innerHTML = '<li>Your cart is empty.</li>';
-        selectedItems.clear();
-      } else {
-        cartItems.forEach((item, index) => {
-          const li = document.createElement('li');
-
-          const checkbox = document.createElement('input');
-          checkbox.type = 'checkbox';
-          checkbox.checked = selectedItems.has(index);
-          checkbox.id = 'cart-item-' + index;
-
-          checkbox.addEventListener('change', () => {
-            if (checkbox.checked) {
-              selectedItems.add(index);
-            } else {
-              selectedItems.delete(index);
-            }
-            updateCartCount();
-          });
-
-          const label = document.createElement('label');
-          label.htmlFor = checkbox.id;
-          label.textContent = `${item.name} - $${item.price.toFixed(2)}`;
-          label.style.marginLeft = '10px';
-          label.style.cursor = 'pointer';
-
-          li.appendChild(checkbox);
-          li.appendChild(label);
-
-          cartList.appendChild(li);
-        });
-      }
-
-      cartSection.style.display = 'block';
-      document.getElementById('checkout').style.display = 'none';
-
-      updateCartCount();
-    }
-
-    function updateCartCount() {
-      document.getElementById('cart-count').innerText = cartItems.length;
-      const buyBtn = document.getElementById('buy-now-btn');
-      buyBtn.disabled = selectedItems.size === 0;
-    }
-
-    function buyNow() {
-      if (selectedItems.size === 0) {
-        alert("Please select at least one product to buy.");
-        return;
-      }
-
-      const itemsToBuy = [...selectedItems].map(index => cartItems[index]);
-      window.itemsToBuy = itemsToBuy;
-
-      document.getElementById('cart').style.display = 'none';
-      document.getElementById('checkout').style.display = 'block';
-    }
-
-    document.getElementById('checkout-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const name = document.getElementById('full-name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const address = document.getElementById('address').value.trim();
-
-      if (!name || !email || !address) {
-        alert('Please fill in all the fields.');
-        return;
-      }
-
-      if (!window.itemsToBuy || window.itemsToBuy.length === 0) {
-        alert('No items selected for purchase.');
-        return;
-      }
-
-      const orderList = window.itemsToBuy.map(item => `- ${item.name} ($${item.price.toFixed(2)})`).join('\n');
-      const totalPrice = window.itemsToBuy.reduce((sum, item) => sum + item.price, 0);
-
-      alert(`Thank you, ${name}! Your order for:\n${orderList}\nTotal: $${totalPrice.toFixed(2)}\nhas been placed.\nWe will ship to:\n${address}\nA confirmation email will be sent to ${email}.`);
-
-      // Remove purchased items from cart
-      cartItems = cartItems.filter((_, index) => !selectedItems.has(index));
-      selectedItems.clear();
-
-      updateCartCount();
-      document.getElementById('checkout-form').reset();
-
-      document.getElementById('checkout').style.display = 'none';
-      showCart();
-    });
-
-    function cancelCheckout() {
-      document.getElementById('checkout').style.display = 'none';
-      showCart();
-    }
-  </script>
-</body>
-</html>
+.button:hover {
+    background-color: transparent !important;
+    transform: translateY(-3px);
+}
