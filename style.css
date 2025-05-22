@@ -147,29 +147,28 @@ section {
 
 .best-sellers-grid {
     display: flex;
-    flex-direction: row;  /* Change this from column to row */
-    flex-wrap: wrap;      /* Allow wrapping to next line if needed */
-    gap: 40px 80px;       /* Adjust gaps (row-gap column-gap) */
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px 60px; /* Adjust spacing between items */
     margin-top: 40px;
-    align-items: flex-start; /* Align items to the top */
-    justify-content: center; /* Center items horizontally */
+    align-items: flex-start;
+    justify-content: center;
     background-color: transparent;
     padding: 60px 80px;
     box-sizing: border-box;
 }
 
-
 .best-seller-item {
-    background-color: rgba(0, 0, 0, 0.8); /* Slightly more opaque background for the items */
-    padding: 50px;
+    flex: 1 1 300px; /* Flex grow/shrink with a base width of 300px */
+    max-width: 350px;
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.8);
     border-radius: 15px;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
-    max-width: 850px;
-    width: 100%;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -180,36 +179,33 @@ section {
 
 .best-seller-item img {
     max-width: 100%;
-    height: 550px;
+    height: 350px;
     object-fit: cover;
     border-radius: 10px;
-    margin-bottom: 35px;
+    margin-bottom: 25px;
 }
 
 .best-seller-item h3 {
-    font-size: 3.5rem;
-    margin-bottom: 25px;
+    font-size: 2rem;
+    margin-bottom: 20px;
     font-weight: 700;
-    line-height: 1.2;
 }
 
 .best-seller-item p {
-    font-size: 1.6rem;
-    line-height: 2;
-    margin-bottom: 50px;
-    flex-grow: 1;
+    font-size: 1.3rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
 }
 
 .button {
     display: inline-block;
-    padding: 18px 35px;
+    padding: 14px 28px;
     background-color: #666;
     color: white;
     text-decoration: none;
     border-radius: 10px;
     transition: background-color 0.2s ease, transform 0.2s ease;
-    align-self: center;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 600;
 }
 
@@ -217,6 +213,7 @@ section {
     background-color: #888;
     transform: translateY(-3px);
 }
+
 
 /* ─── Footer ──────────────────────────────────────────────────────────────── */
 footer {
