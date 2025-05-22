@@ -2,378 +2,348 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DebloatX</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Y2K Style Store</title>
   <style>
-    /* Improved Cart Section Styling */
-    .cart-section {
-      position: fixed;
-      top: 60px;
-      right: 20px;
-      background: rgba(30, 30, 30, 0.95);
-      border-radius: 12px;
-      padding: 25px 30px;
-      width: 320px;
-      max-height: 420px;
-      overflow-y: auto;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-      z-index: 999;
-      display: none;
-      color: #f0f0f0;
-      font-family: 'Poppins', sans-serif;
-      font-size: 15px;
-      line-height: 1.4;
-      user-select: none;
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+      color: #444;
     }
-
-    .cart-section h2 {
-      margin-top: 0;
-      font-weight: 700;
-      font-size: 22px;
-      letter-spacing: 1px;
-      color: #fff;
+    h1, h2 {
+      text-align: center;
+      color: #222;
+    }
+    .best-sellers {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .best-seller-item {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+      width: 280px;
+      text-align: center;
+      cursor: default;
+      transition: transform 0.15s ease-in-out;
+    }
+    .best-seller-item:hover {
+      transform: scale(1.03);
+    }
+    .best-seller-item img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .best-seller-item h3 {
+      margin: 0 0 10px;
+      font-size: 1.25rem;
+      color: #222;
+    }
+    .best-seller-item p {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      color: #666;
+    }
+    .best-seller-item .price {
+      font-size: 1.5rem;
+      font-weight: 600;
       margin-bottom: 20px;
-      border-bottom: 1px solid #444;
-      padding-bottom: 10px;
-      position: relative;
+      color: #888;
     }
-
-    .cart-section ul {
+    .best-seller-item button {
+      background-color: #ff6f61;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1rem;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .best-seller-item button:hover:not(:disabled) {
+      background-color: #e65b50;
+    }
+    .best-seller-item button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    #cart {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 500px;
+      margin: 0 auto 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: none;
+    }
+    #cart h2 {
+      margin-top: 0;
+    }
+    #cart-items {
       list-style: none;
       padding: 0;
-      margin: 0 0 20px 0;
-      max-height: 280px;
+      margin: 20px 0;
+      max-height: 200px;
       overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: #666 transparent;
     }
-
-    .cart-section ul::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    .cart-section ul::-webkit-scrollbar-thumb {
-      background-color: #666;
-      border-radius: 3px;
-    }
-
-    .cart-section li {
-      padding: 12px 10px;
-      border-bottom: 1px solid #444;
-      color: #ddd;
-      font-weight: 500;
-      cursor: default;
-      transition: background-color 0.2s ease;
-      border-radius: 6px;
-      margin-bottom: 8px;
+    #cart-items li {
+      margin-bottom: 10px;
+      font-size: 1rem;
       display: flex;
       align-items: center;
     }
-
-    .cart-section li:hover {
-      background-color: #3a3a3a;
-    }
-
-    .cart-section button {
-      cursor: pointer;
-      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-      color: white;
-      border: none;
-      padding: 12px 18px;
-      font-weight: 600;
-      border-radius: 30px;
-      margin-right: 10px;
-      box-shadow: 0 4px 10px rgba(37, 117, 252, 0.6);
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-      font-size: 14px;
-      user-select: none;
-    }
-
-    .cart-section button:hover:not(:disabled) {
-      background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
-      box-shadow: 0 6px 14px rgba(106, 17, 203, 0.8);
-    }
-
-    .cart-section button:disabled {
-      background: #555;
-      cursor: not-allowed;
-      box-shadow: none;
-      color: #999;
-    }
-
-    .cart-section label {
-      font-weight: 600;
-      margin-left: 10px;
-      color: #eee;
-      font-size: 14px;
-      cursor: pointer;
-      flex-grow: 1;
-    }
-
-    .cart-section input[type="checkbox"] {
-      cursor: pointer;
+    #cart-items input[type="checkbox"] {
       width: 18px;
       height: 18px;
-    }
-
-    .cart-section input, .cart-section textarea {
-      width: 100%;
-      padding: 10px 12px;
-      margin-bottom: 20px;
-      border-radius: 8px;
-      border: none;
-      font-size: 14px;
-      background-color: #222;
-      color: #eee;
-      resize: vertical;
-      box-shadow: inset 0 0 6px #111;
-      transition: background-color 0.3s ease;
-    }
-
-    .cart-section input:focus, .cart-section textarea:focus {
-      background-color: #333;
-      outline: none;
-    }
-
-    .cart-section textarea {
-      min-height: 80px;
-    }
-
-    /* Close button inside cart */
-    .cart-section .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 24px;
-      color: #888;
       cursor: pointer;
-      transition: color 0.2s ease;
-      user-select: none;
     }
-
-    .cart-section .close-btn:hover {
-      color: #fff;
+    #buy-now-btn {
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      width: 100%;
+    }
+    #buy-now-btn:disabled {
+      background-color: #aaa;
+      cursor: not-allowed;
+    }
+    #buy-now-btn:hover:not(:disabled) {
+      background-color: #005fa3;
+    }
+    #checkout {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 500px;
+      margin: 0 auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: none;
+    }
+    #checkout h2 {
+      margin-top: 0;
+    }
+    #checkout-form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    #checkout-form input, #checkout-form textarea {
+      width: 100%;
+      padding: 8px 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    #checkout-form textarea {
+      resize: vertical;
+      height: 80px;
+    }
+    #checkout-form button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+      transition: background-color 0.2s ease;
+    }
+    #checkout-form button:hover {
+      background-color: #218838;
+    }
+    #cancel-btn {
+      background-color: #dc3545;
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    #cancel-btn:hover {
+      background-color: #c82333;
     }
   </style>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="nav-container">
-    <ul class="nav-list">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Clothing</a></li>
-      <li><a href="#">Colognes</a></li>
-      <li><a href="#">Sneakers</a></li>
-    </ul>
-    <div class="cart-button">
-      <a href="#cart" onclick="showCart(); return false;">
-        <i class="fas fa-shopping-cart cart-icon"></i>
-        <span id="cart-count">0</span>
-      </a>
+  <h1>Our Best Sellers</h1>
+
+  <section class="best-sellers">
+    <div class="best-seller-item">
+      <img src="pant1.png" alt="Baggy Y2k Star Jeans" />
+      <h3>Baggy Y2k Star Jeans</h3>
+      <p>Flashy stars and nostalgic vibes bring back the era’s iconic aesthetic.</p>
+      <p class="price">3500₹</p>
+      <button onclick="addToCart('Baggy Y2k Star Jeans', 79.99); event.stopPropagation();">Add to Cart</button>
     </div>
-  </div>
-</header>
 
-<!-- Cart Section -->
-<section id="cart" class="cart-section">
-  <span class="close-btn" onclick="closeCart()">&times;</span>
-  <h2>Your Cart</h2>
-  <ul id="cart-items">
-    <li>Your cart is empty.</li>
-  </ul>
-  <button onclick="closeCart()">Close Cart</button>
-  <button id="buy-now-btn" onclick="buyNow()" disabled>Buy Now</button>
-</section>
-
-<!-- Checkout Section -->
-<section id="checkout" class="cart-section">
-  <h2>Checkout</h2>
-  <form id="checkout-form">
-    <label for="full-name">Full Name:</label>
-    <input type="text" id="full-name" required />
-
-    <label for="email">Email Address:</label>
-    <input type="email" id="email" required />
-
-    <label for="address">Shipping Address:</label>
-    <textarea id="address" rows="3" required></textarea>
-
-    <button type="submit">Confirm Purchase</button>
-    <button type="button" onclick="cancelCheckout()">Cancel</button>
-  </form>
-</section>
-
-<section class="hero">
-  <div class="overlay-text">
-    <h1>DebloatX</h1>
-    <p>Luxury scents &amp; streetwear — dropshipped to your door.</p>
-  </div>
-</section>
-
-<section class="best-sellers">
-  <div class="overlay-section">
-    <h2>Our Best Sellers</h2>
-    <div class="best-sellers-grid">
-
-      <div class="best-seller-item">
-        <img src="pant1.png" alt="Baggy Y2k Star Jeans" />
-        <h3>Baggy Y2k Star Jeans</h3>
-        <p>Flashy stars and nostalgic vibes bring back the era’s iconic aesthetic.</p>
-        <button onclick="addToCart('Baggy Y2k Star Jeans'); event.stopPropagation();">Add to Cart</button>
-      </div>
-
-      <div class="best-seller-item">
-        <img src="shoe1.png" alt="Nike SB Force 58" />
-        <h3>Nike SB Force 58</h3>
-        <p>The latest and greatest innovation to hit the streets, the Nike SB Force 58 gives you the durability of a cupsole with the flexibility of a vulcanised shoe.</p>
-        <button onclick="addToCart('Nike SB Force 58'); event.stopPropagation();">Add to Cart</button>
-      </div>
-
-      <div class="best-seller-item">
-        <img src="watch1.png" alt="Sonata Quartz Green Dial Watch" />
-        <h3>Sonata Quartz Green Dial Watch</h3>
-        <p>The striking green dial, complemented by the luxurious golden stainless steel strap, offers a perfect blend of sophistication and masculinity.</p>
-        <button onclick="addToCart('Sonata Quartz Green Dial Watch'); event.stopPropagation();">Add to Cart</button>
-      </div>
-
+    <div class="best-seller-item">
+      <img src="shoe1.png" alt="Nike SB Force 58" />
+      <h3>Nike SB Force 58</h3>
+      <p>The latest and greatest innovation to hit the streets, the Nike SB Force 58 gives you the durability of a cupsole with the flexibility of a vulcanised shoe.</p>
+      <p class="price">6399₹</p>
+      <button onclick="addToCart('Nike SB Force 58', 120.00); event.stopPropagation();">Add to Cart</button>
     </div>
-  </div>
-</section>
 
-<section class="why-us">
-  <div class="overlay-section">
-    <h2>Why Choose Us</h2>
-    <ul>
-      <li>Curated collection of luxury &amp; street fashion fragrances</li>
-      <li>Fast, free shipping on all orders</li>
-      <li>Unbeatable prices and discounts</li>
-      <li>100% authentic, guaranteed</li>
-    </ul>
-  </div>
-</section>
+    <div class="best-seller-item">
+      <img src="watch1.png" alt="Sonata Quartz Green Dial Watch" />
+      <h3>Sonata Quartz Green Dial Watch</h3>
+      <p>The striking green dial, complemented by the luxurious golden stainless steel strap, offers a perfect blend of sophistication and masculinity.</p>
+      <p class="price">4000₹</p>
+      <button onclick="addToCart('Sonata Quartz Green Dial Watch', 150.50); event.stopPropagation();">Add to Cart</button>
+    </div>
+  </section>
 
-<footer class="site-footer">
-  <p>© 2025 DebloatX. All rights reserved.</p>
-</footer>
+  <section id="cart">
+    <h2>Your Cart (<span id="cart-count">0</span>)</h2>
+    <ul id="cart-items"></ul>
+    <button id="buy-now-btn" disabled onclick="buyNow()">Buy Now</button>
+  </section>
 
-<script>
-  let cartItems = [];
-  let selectedItems = new Set();
+  <section id="checkout">
+    <h2>Checkout</h2>
+    <form id="checkout-form">
+      <label for="full-name">Full Name</label>
+      <input type="text" id="full-name" required />
 
-  function addToCart(productName) {
-    cartItems.push(productName);
-    selectedItems.add(cartItems.length - 1);
-    updateCartCount();
-    showCart();
-  }
+      <label for="email">Email Address</label>
+      <input type="email" id="email" required />
 
-  function updateCartCount() {
-    document.getElementById('cart-count').innerText = cartItems.length;
-    const buyBtn = document.getElementById('buy-now-btn');
-    buyBtn.disabled = selectedItems.size === 0;
-  }
+      <label for="address">Shipping Address</label>
+      <textarea id="address" required></textarea>
 
-  function showCart() {
-    const cartSection = document.getElementById('cart');
-    const cartList = document.getElementById('cart-items');
-    cartList.innerHTML = '';
+      <button type="submit">Confirm Order</button>
+      <button type="button" id="cancel-btn" onclick="cancelCheckout()">Cancel</button>
+    </form>
+  </section>
 
-    if (cartItems.length === 0) {
-      cartList.innerHTML = '<li>Your cart is empty.</li>';
-      selectedItems.clear();
-    } else {
-      cartItems.forEach((item, index) => {
-        const li = document.createElement('li');
+  <script>
+    let cartItems = []; // array of {name, price}
+    let selectedItems = new Set();
 
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.checked = selectedItems.has(index);
-        checkbox.id = 'cart-item-' + index;
+    function addToCart(productName, price) {
+      cartItems.push({ name: productName, price: price });
+      selectedItems.add(cartItems.length - 1);
+      updateCartCount();
+      showCart();
+    }
 
-        checkbox.addEventListener('change', () => {
-          if (checkbox.checked) {
-            selectedItems.add(index);
-          } else {
-            selectedItems.delete(index);
-          }
-          updateCartCount();
+    function showCart() {
+      const cartSection = document.getElementById('cart');
+      const cartList = document.getElementById('cart-items');
+      cartList.innerHTML = '';
+
+      if (cartItems.length === 0) {
+        cartList.innerHTML = '<li>Your cart is empty.</li>';
+        selectedItems.clear();
+      } else {
+        cartItems.forEach((item, index) => {
+          const li = document.createElement('li');
+
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.checked = selectedItems.has(index);
+          checkbox.id = 'cart-item-' + index;
+
+          checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+              selectedItems.add(index);
+            } else {
+              selectedItems.delete(index);
+            }
+            updateCartCount();
+          });
+
+          const label = document.createElement('label');
+          label.htmlFor = checkbox.id;
+          label.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+          label.style.marginLeft = '10px';
+          label.style.cursor = 'pointer';
+
+          li.appendChild(checkbox);
+          li.appendChild(label);
+
+          cartList.appendChild(li);
         });
+      }
 
-        const label = document.createElement('label');
-        label.htmlFor = checkbox.id;
-        label.textContent = item;
-        label.style.marginLeft = '10px';
-        label.style.cursor = 'pointer';
+      cartSection.style.display = 'block';
+      document.getElementById('checkout').style.display = 'none';
 
-        li.appendChild(checkbox);
-        li.appendChild(label);
-
-        cartList.appendChild(li);
-      });
+      updateCartCount();
     }
 
-    cartSection.style.display = 'block';
-    document.getElementById('checkout').style.display = 'none';
-
-    updateCartCount();
-  }
-
-  function closeCart() {
-    document.getElementById('cart').style.display = 'none';
-  }
-
-  function buyNow() {
-    if (selectedItems.size === 0) {
-      alert("Please select at least one product to buy.");
-      return;
+    function updateCartCount() {
+      document.getElementById('cart-count').innerText = cartItems.length;
+      const buyBtn = document.getElementById('buy-now-btn');
+      buyBtn.disabled = selectedItems.size === 0;
     }
 
-    const itemsToBuy = [...selectedItems].map(index => cartItems[index]);
-    window.itemsToBuy = itemsToBuy;
+    function buyNow() {
+      if (selectedItems.size === 0) {
+        alert("Please select at least one product to buy.");
+        return;
+      }
 
-    document.getElementById('cart').style.display = 'none';
-    document.getElementById('checkout').style.display = 'block';
-  }
+      const itemsToBuy = [...selectedItems].map(index => cartItems[index]);
+      window.itemsToBuy = itemsToBuy;
 
-  document.getElementById('checkout-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const name = document.getElementById('full-name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const address = document.getElementById('address').value.trim();
-
-    if (!name || !email || !address) {
-      alert('Please fill in all the fields.');
-      return;
+      document.getElementById('cart').style.display = 'none';
+      document.getElementById('checkout').style.display = 'block';
     }
 
-    if (!window.itemsToBuy || window.itemsToBuy.length === 0) {
-      alert('No items selected for purchase.');
-      return;
+    document.getElementById('checkout-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('full-name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const address = document.getElementById('address').value.trim();
+
+      if (!name || !email || !address) {
+        alert('Please fill in all the fields.');
+        return;
+      }
+
+      if (!window.itemsToBuy || window.itemsToBuy.length === 0) {
+        alert('No items selected for purchase.');
+        return;
+      }
+
+      const orderList = window.itemsToBuy.map(item => `- ${item.name} ($${item.price.toFixed(2)})`).join('\n');
+      const totalPrice = window.itemsToBuy.reduce((sum, item) => sum + item.price, 0);
+
+      alert(`Thank you, ${name}! Your order for:\n${orderList}\nTotal: $${totalPrice.toFixed(2)}\nhas been placed.\nWe will ship to:\n${address}\nA confirmation email will be sent to ${email}.`);
+
+      // Remove purchased items from cart
+      cartItems = cartItems.filter((_, index) => !selectedItems.has(index));
+      selectedItems.clear();
+
+      updateCartCount();
+      document.getElementById('checkout-form').reset();
+
+      document.getElementById('checkout').style.display = 'none';
+      showCart();
+    });
+
+    function cancelCheckout() {
+      document.getElementById('checkout').style.display = 'none';
+      showCart();
     }
-
-    alert(`Thank you, ${name}! Your order for:\n- ${window.itemsToBuy.join('\n- ')}\nhas been placed.\nWe will ship to:\n${address}\nA confirmation email will be sent to ${email}.`);
-
-    cartItems = cartItems.filter((_, index) => !selectedItems.has(index));
-    selectedItems.clear();
-
-    updateCartCount();
-    document.getElementById('checkout-form').reset();
-
-    document.getElementById('checkout').style.display = 'none';
-    showCart();
-  });
-
-  function cancelCheckout() {
-    document.getElementById('checkout').style.display = 'none';
-    showCart();
-  }
-</script>
-
+  </script>
 </body>
 </html>
