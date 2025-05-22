@@ -1,79 +1,221 @@
-/* Global Styles */
+/* -----------------------------
+   Base Styles
+------------------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body, h1, h2, h3, h4, h5, h6, p, a, ul, li, button {
     font-family: 'Poppins', sans-serif;
     color: white;
-    margin: 0;
-    padding: 0;
 }
 
-/* Resize pant1.png image specifically */
-.best-seller-item img[src*="pant1.png"] {
-    width: 250px;
-    height: auto;
-    object-fit: cover;
-    border-radius: 10px;
+body {
+    background-color: #0f0f0f;
+    line-height: 1.6;
 }
 
-/* Sample layout structure */
+/* -----------------------------
+   Header & Navigation
+------------------------------ */
 .site-header {
     background-color: #000;
-    padding: 1em;
+    padding: 1em 2em;
+    border-bottom: 1px solid #222;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .nav-list {
     list-style: none;
     display: flex;
-    gap: 1em;
-    justify-content: flex-end;
+    gap: 1.5em;
 }
 
 .nav-list a {
     color: white;
     text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
 }
 
+.nav-list a:hover {
+    color: #ccc;
+}
+
+/* -----------------------------
+   Hero Section
+------------------------------ */
 .hero {
-    background: #111;
-    padding: 4em 2em;
+    background: linear-gradient(to bottom, #1a1a1a, #0f0f0f);
+    padding: 5em 2em;
     text-align: center;
 }
 
 .overlay-text h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5em;
 }
 
-.overlay-section {
-    background: #1a1a1a;
-    padding: 2em;
+.overlay-text p {
+    font-size: 1.25rem;
+    color: #ccc;
+}
+
+/* -----------------------------
+   Section: Why Choose Us
+------------------------------ */
+.why-us {
+    background-color: #1c1c1c;
+    padding: 3em 2em;
+    text-align: center;
+}
+
+.why-us h2 {
+    font-size: 2rem;
+    margin-bottom: 1em;
+}
+
+.why-us ul {
+    list-style-type: disc;
+    padding-left: 1.5em;
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+    color: #ddd;
+}
+
+.why-us li {
+    margin-bottom: 0.75em;
+}
+
+/* -----------------------------
+   Best Sellers Section
+------------------------------ */
+.best-sellers {
+    padding: 3em 2em;
+    background-color: #111;
+}
+
+.best-sellers h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2em;
 }
 
 .best-sellers-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2em;
-    margin-top: 1em;
 }
 
 .best-seller-item {
-    background: #222;
-    padding: 1em;
+    background-color: #1e1e1e;
+    padding: 1.5em;
     border-radius: 10px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.best-seller-item:hover {
+    transform: scale(1.02);
+}
+
+.best-seller-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 1em;
+}
+
+/* Target pant1.png specifically for resizing */
+.best-seller-item img[src*="pant1.png"] {
+    width: 250px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.best-seller-item h3 {
+    margin: 0.5em 0;
+    font-size: 1.2rem;
+}
+
+.best-seller-item p {
+    font-size: 0.95rem;
+    color: #ccc;
+    margin-bottom: 1em;
 }
 
 .button {
-    display: inline-block;
-    margin-top: 1em;
-    padding: 0.5em 1em;
     background-color: #fff;
     color: #000;
+    padding: 0.5em 1.2em;
     text-decoration: none;
     border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-/* Footer */
+.button:hover {
+    background-color: #444;
+    color: white;
+}
+
+/* -----------------------------
+   Coming Soon Section
+------------------------------ */
+.coming-soon {
+    background-color: #1a1a1a;
+    padding: 3em 2em;
+    text-align: center;
+}
+
+.coming-soon h2 {
+    font-size: 2rem;
+    margin-bottom: 0.75em;
+}
+
+.coming-soon p {
+    font-size: 1.1rem;
+    color: #ccc;
+}
+
+/* -----------------------------
+   Footer
+------------------------------ */
 footer {
     background-color: #000;
-    text-align: center;
     padding: 1em;
+    text-align: center;
     font-size: 0.9rem;
+    color: #888;
 }
+
+/* -----------------------------
+   Responsive
+------------------------------ */
+@media (max-width: 768px) {
+    .overlay-text h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero {
+        padding: 3em 1.5em;
+    }
+
+    .why-us ul {
+        padding-left: 1em;
+    }
+
+    .best-sellers-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
