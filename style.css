@@ -1,7 +1,16 @@
-/* ─── Section: Best Sellers ───────────────────────────────────────────────── */
+/* ─── Global Styles ─────────────────────────────────────────────────── */
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+/* ─── Section: Best Sellers ─────────────────────────────────────────── */
 .best-sellers {
-    background-color: #F0F0F0; /* Light gray background for the section */
-    padding: 80px 0; /* Add padding to the section */
+    background-color: #F0F0F0; /* Light gray background */
+    padding: 80px 0;
 }
 
 .best-sellers .section-title {
@@ -11,38 +20,33 @@
     margin-bottom: 40px;
 }
 
-/* ─── Best Sellers Section (Backdrop Between Products) ────────────────────── */
 .best-sellers .overlay-section {
     max-width: 1200px;
-    padding: 0; /* Remove padding from the overlay-section */
-    margin: 0 auto; /* Center the container */
+    padding: 0;
+    margin: 0 auto;
 }
 
 .best-sellers-grid {
     display: flex;
-    flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
-    gap: 30px; /* Set a consistent gap between products */
-    justify-content: center; /* Center the items horizontally */
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
     margin-top: 40px;
-    align-items: stretch; /* Ensure items stretch to fill available space */
-    background-color: transparent; /* Make the grid container transparent */
-    padding: 60px 80px; /* Add padding around the grid for spacing within the full-width section */
+    padding: 0 60px; /* Padding on the sides for spacing */
     box-sizing: border-box;
 }
 
-/* ─── Best Seller Item (Styling each product box) ───────────────────────── */
+/* Best Seller Item */
 .best-seller-item {
-    background-color: rgba(0, 0, 0, 0.8); /* Slightly more opaque background for the items */
-    padding: 20px; /* Reduced padding for side-by-side layout */
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
     border-radius: 15px;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-sizing: border-box;
-    width: 300px; /* Set width for each product to be consistent */
+    width: 300px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    /* Ensure consistency across product widths */
 }
 
 .best-seller-item:hover {
@@ -52,103 +56,92 @@
 
 .best-seller-item img {
     max-width: 100%;
-    height: 350px; /* Adjust image height */
+    height: 350px;
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 15px;
 }
 
 .best-seller-item h3 {
-    font-size: 2.2rem; /* Adjust heading size for better fit */
+    font-size: 2.2rem;
     margin-bottom: 15px;
     font-weight: 700;
-    line-height: 1.2;
 }
 
 .best-seller-item p {
-    font-size: 1.3rem; /* Adjust paragraph size for better fit */
+    font-size: 1.3rem;
     line-height: 1.8;
     margin-bottom: 30px;
-    flex-grow: 1;
 }
 
 .button {
     display: inline-block;
     padding: 12px 25px;
-    background-color: #666;
+    background-color: #ff6f61;
     color: white;
     text-decoration: none;
-    border-radius: 10px;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    align-self: center;
+    border-radius: 5px;
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .button:hover {
-    background-color: #888;
+    background-color: #e65c4e;
     transform: translateY(-3px);
 }
 
-/* ─── Responsive Adjustments for Smaller Screens ─────────────────────────── */
+/* ─── Responsive Adjustments ─────────────────────────────────────────── */
 @media (max-width: 1024px) {
     .best-sellers-grid {
-        gap: 20px; /* Adjust gap for medium screens */
+        gap: 20px;
         justify-content: space-between;
     }
 
     .best-seller-item {
-        width: 48%; /* Adjust item width for slightly smaller screens (two per row) */
+        width: 48%; /* Two items per row on medium screens */
     }
 }
 
 @media (max-width: 768px) {
-    .best-sellers-grid {
-        gap: 20px; /* Adjust gap on smaller screens */
-    }
-
     .best-seller-item {
-        width: 100%; /* Each product takes up the full width of the screen */
-        padding: 15px; /* Reduced padding */
+        width: 100%; /* Full width for smaller screens */
+        padding: 15px;
     }
 
     .best-seller-item img {
-        height: 280px; /* Adjust image height for mobile */
+        height: 280px;
     }
 
     .best-seller-item h3 {
-        font-size: 1.8rem; /* Adjust heading size for mobile */
+        font-size: 1.8rem;
     }
 
     .best-seller-item p {
-        font-size: 1.2rem; /* Adjust paragraph size for mobile */
+        font-size: 1.2rem;
     }
 }
 
 @media (max-width: 480px) {
-    .best-sellers-grid {
-        gap: 15px; /* Reduced gap further for very small screens */
-    }
-
     .best-seller-item {
-        width: 100%; /* Ensure full width for each item */
-        padding: 10px; /* Reduced padding */
+        width: 100%;
+        padding: 10px;
     }
 
     .best-seller-item img {
-        height: 220px; /* Adjust image height for very small screens */
+        height: 220px;
     }
 
     .best-seller-item h3 {
-        font-size: 1.6rem; /* Adjust heading size */
+        font-size: 1.6rem;
     }
 
     .best-seller-item p {
-        font-size: 1.1rem; /* Adjust paragraph size */
+        font-size: 1.1rem;
     }
 }
 
-/* ─── Section: Our Services ──────────────────────────────────────────────── */
+/* ─── Section: Our Services ─────────────────────────────────────────── */
 .our-services {
     background-color: #f8f8f8;
     padding: 100px 0;
@@ -161,7 +154,7 @@
     margin-bottom: 40px;
 }
 
-/* ─── Service Item ───────────────────────────────────────────────────────── */
+/* Service Item */
 .service-item {
     text-align: center;
     background-color: #ffffff;
@@ -193,21 +186,7 @@
     color: #555;
 }
 
-/* ─── Responsive Adjustment for Services Section ─────────────────────────── */
-@media (max-width: 768px) {
-    .service-item {
-        max-width: 45%;
-        margin-bottom: 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .service-item {
-        max-width: 100%;
-    }
-}
-
-/* ─── Call to Action ─────────────────────────────────────────────────────── */
+/* ─── Call to Action ─────────────────────────────────────────────────── */
 .cta-section {
     background-color: #ff6f61;
     padding: 60px 0;
@@ -242,7 +221,7 @@
     transform: translateY(-3px);
 }
 
-/* ─── Footer ─────────────────────────────────────────────────────────────── */
+/* ─── Footer ─────────────────────────────────────────────────────────── */
 .footer {
     background-color: #333;
     color: #fff;
@@ -265,37 +244,7 @@
     text-decoration: underline;
 }
 
-/* ─── General Styles for All Sections ────────────────────────────────────── */
-body {
-    font-family: 'Arial', sans-serif;
-    color: #333;
-    background-color: #fff;
-}
-
-h1, h2, h3, p {
-    margin: 0;
-    padding: 0;
-}
-
-/* ─── Button Styles ─────────────────────────────────────────────────────── */
-.button {
-    display: inline-block;
-    padding: 12px 25px;
-    background-color: #ff6f61;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.button:hover {
-    background-color: #e65c4e;
-    transform: translateY(-3px);
-}
-
-/* ─── Navbar Styles ─────────────────────────────────────────────────────── */
+/* ─── Navbar Styles ─────────────────────────────────────────────────── */
 .navbar {
     background-color: #333;
     padding: 20px;
