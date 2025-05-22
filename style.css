@@ -202,24 +202,23 @@ section {
     box-sizing: border-box;
 }
 
-.best-seller-item {
-    flex: 1 1 300px; /* Flex grow/shrink with a base width of 300px */
-    max-width: 350px;
-    padding: 30px;
-    background-color: rgba(0, 0, 0, 0.8);
-    border-radius: 15px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-sizing: border-box;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.best-seller-item button {
+    background-color: #666;
+    color: white;
+    border: none;             /* Remove default border */
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.best-seller-item:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+.best-seller-item button:hover {
+    background-color: #888;
+    transform: translateY(-3px);
 }
+
 
 .best-seller-item img {
     max-width: 100%;
