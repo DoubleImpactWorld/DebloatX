@@ -355,91 +355,65 @@ footer p {
     }
 }
 
-@media (max-width: 768px) {
-    .hero {
-        min-height: 70vh;
+@media (max-width: 767px) {
+    .nav-list {
+        flex-direction: column;
+    }
+    .nav-list li {
+        margin: 10px 0;
     }
     .overlay-text {
-        padding: 30px 40px;
+        padding: 40px 20px;
     }
     h1 {
-        font-size: 3.5rem;
+        font-size: 3rem;
     }
     h1 + p {
         font-size: 1.5rem;
     }
-    .why-us h2,
-    .coming-soon h2,
-    .best-sellers h2 {
-        font-size: 2.5rem;
-    }
     .overlay-section {
         padding: 40px 5%;
     }
-    .best-sellers-grid {
-        max-width: 500px;
-        gap: 40px;
-    }
-    .best-seller-item {
-        padding: 25px;
-    }
-    .best-seller-item img {
-        height: 280px;
-    }
-    .best-seller-item h3 {
-        font-size: 2rem;
-    }
-    .best-seller-item p {
-        font-size: 1.2rem;
-    }
-    .button {
-        padding: 12px 25px;
-        font-size: 1.1rem;
-    }
-    .nav-list {
-        flex-wrap: wrap;
-        justify-content: space-around;
-    }
-    .nav-list li {
-        margin: 5px 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero {
-        min-height: 60vh;
-    }
-    .overlay-text {
-        padding: 20px 25px;
-    }
-    h1 {
-        font-size: 2.8rem;
-    }
-    h1 + p {
-        font-size: 1.2rem;
-    }
     .why-us h2,
     .coming-soon h2,
     .best-sellers h2 {
-        font-size: 2rem;
-    }
-    .overlay-section {
-        padding: 30px 5%;
+        font-size: 2.4rem;
     }
     .best-sellers-grid {
-        max-width: 100%; /* Allow full width on smallest screens */
+        flex-direction: column;
         gap: 30px;
+        padding: 30px 20px;
     }
     .best-seller-item {
-        padding: 20px;
+        max-width: 100%;
+        padding: 25px 20px;
+        margin: 0 auto;
     }
     .best-seller-item img {
-        height: 220px;
+        height: 300px;
     }
     .best-seller-item h3 {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
     .best-seller-item p {
         font-size: 1.1rem;
     }
+}
+
+/* ─── Custom Button Style Override for Add to Cart Buttons ──────────────── */
+.best-seller-item button {
+  background: transparent;           /* no white background */
+  padding: 14px 28px;                /* same padding as your .button class */
+  border: 2px solid white;           /* white border */
+  color: white;                      /* white text */
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.best-seller-item button:hover {
+  background-color: white;           /* white background on hover */
+  color: black;                      /* black text on hover */
 }
