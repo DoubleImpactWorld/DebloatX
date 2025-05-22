@@ -70,6 +70,8 @@
       transition: background-color 0.2s ease;
       border-radius: 6px;
       margin-bottom: 8px;
+      display: flex;
+      align-items: center;
     }
 
     .cart-section li:hover {
@@ -104,11 +106,18 @@
     }
 
     .cart-section label {
-      display: block;
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-left: 10px;
       color: #eee;
       font-size: 14px;
+      cursor: pointer;
+      flex-grow: 1;
+    }
+
+    .cart-section input[type="checkbox"] {
+      cursor: pointer;
+      width: 18px;
+      height: 18px;
     }
 
     .cart-section input, .cart-section textarea {
@@ -242,30 +251,31 @@
     <ul>
       <li>Curated collection of luxury &amp; street fashion fragrances</li>
       <li>Fast, free shipping on all orders</li>
-      <li>100% authentic products — no fakes, ever</li>
-      <li>Exclusive prices. Only online.</li>
+      <li>Unbeatable prices and discounts</li>
+      <li>100% authentic, guaranteed</li>
     </ul>
   </div>
 </section>
 
-<footer>
-  <p>&copy; 2025 DebloatX. All rights reserved.</p>
+<footer class="site-footer">
+  <p>© 2025 DebloatX. All rights reserved.</p>
 </footer>
 
 <script>
   let cartItems = [];
+  let selectedItems = new Set();
 
   function addToCart(productName) {
     cartItems.push(productName);
+    selectedItems.add(cartItems.length - 1);
     updateCartCount();
     showCart();
   }
 
   function updateCartCount() {
     document.getElementById('cart-count').innerText = cartItems.length;
-    // Enable buy button only if cart has items
     const buyBtn = document.getElementById('buy-now-btn');
-    buyBtn.disabled = cartItems.length === 0;
+    buyBtn.disabled = selectedItems.size === 0;
   }
 
   function showCart() {
@@ -275,17 +285,42 @@
 
     if (cartItems.length === 0) {
       cartList.innerHTML = '<li>Your cart is empty.</li>';
+      selectedItems.clear();
     } else {
-      cartItems.forEach(item => {
+      cartItems.forEach((item, index) => {
         const li = document.createElement('li');
-        li.textContent = item;
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = selectedItems.has(index);
+        checkbox.id = 'cart-item-' + index;
+
+        checkbox.addEventListener('change', () => {
+          if (checkbox.checked) {
+            selectedItems.add(index);
+          } else {
+            selectedItems.delete(index);
+          }
+          updateCartCount();
+        });
+
+        const label = document.createElement('label');
+        label.htmlFor = checkbox.id;
+        label.textContent = item;
+        label.style.marginLeft = '10px';
+        label.style.cursor = 'pointer';
+
+        li.appendChild(checkbox);
+        li.appendChild(label);
+
         cartList.appendChild(li);
       });
     }
+
     cartSection.style.display = 'block';
-    
-    // Hide checkout form if visible
     document.getElementById('checkout').style.display = 'none';
+
+    updateCartCount();
   }
 
   function closeCart() {
@@ -293,45 +328,48 @@
   }
 
   function buyNow() {
-    if (cartItems.length === 0) {
-      alert("Your cart is empty.");
+    if (selectedItems.size === 0) {
+      alert("Please select at least one product to buy.");
       return;
     }
-    
-    // Hide cart section and show checkout form
+
+    const itemsToBuy = [...selectedItems].map(index => cartItems[index]);
+    window.itemsToBuy = itemsToBuy;
+
     document.getElementById('cart').style.display = 'none';
     document.getElementById('checkout').style.display = 'block';
   }
 
   document.getElementById('checkout-form').addEventListener('submit', function(e) {
     e.preventDefault();
-    
+
     const name = document.getElementById('full-name').value.trim();
     const email = document.getElementById('email').value.trim();
     const address = document.getElementById('address').value.trim();
-    
+
     if (!name || !email || !address) {
       alert('Please fill in all the fields.');
       return;
     }
-    
-    // Simulate purchase success
-    alert(`Thank you, ${name}! Your order has been placed.\nWe will ship to:\n${address}\nA confirmation email will be sent to ${email}.`);
-    
-    // Clear cart and form
-    cartItems = [];
+
+    if (!window.itemsToBuy || window.itemsToBuy.length === 0) {
+      alert('No items selected for purchase.');
+      return;
+    }
+
+    alert(`Thank you, ${name}! Your order for:\n- ${window.itemsToBuy.join('\n- ')}\nhas been placed.\nWe will ship to:\n${address}\nA confirmation email will be sent to ${email}.`);
+
+    cartItems = cartItems.filter((_, index) => !selectedItems.has(index));
+    selectedItems.clear();
+
     updateCartCount();
-    
-    // Reset form fields
     document.getElementById('checkout-form').reset();
-    
-    // Hide checkout form, show cart section (empty now)
+
     document.getElementById('checkout').style.display = 'none';
     showCart();
   });
 
   function cancelCheckout() {
-    // Hide checkout form and show cart again
     document.getElementById('checkout').style.display = 'none';
     showCart();
   }
