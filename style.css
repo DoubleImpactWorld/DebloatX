@@ -91,15 +91,11 @@ body, h1, h2, h3, h4, h5, h6, p, a, li, ul, span, div, button {
     justify-content: center;
     align-items: center;
     text-align: center;
-    /* Removed padding here as the overlay-text will handle it */
     box-sizing: border-box;
-    /* To make it cover full width horizontally */
     width: 100%;
-    
 }
 
 .overlay-text {
-    /* Smooth gradient black transparent background */
     background: linear-gradient(
         135deg,
         rgba(0, 0, 0, 0.8) 0%,
@@ -127,23 +123,22 @@ h1 + p {
 
 /* ─── Content Sections ────────────────────────────────────────────────────── */
 section {
-    padding: 0; /* Removed padding here, overlay-section will handle it */
+    padding: 0;
     text-align: center;
     position: relative;
     z-index: 1;
-    /* To make it cover full width horizontally */
     width: 100%;
-    margin-top: -1px; /* Small negative margin to prevent tiny gaps between sections */
+    margin-top: -1px;
 }
 
 .overlay-section {
     background-color: rgba(0, 0, 0, 0.5);
     margin: 0 auto;
-    padding: 100px 10%; /* Increased padding for height, used percentage for width responsiveness */
-    border-radius: 0px; /* Removed border-radius for sharp edges */
-    max-width: none; /* Removed max-width */
-    width: 100%; /* Make it take full width */
-    box-sizing: border-box; /* Include padding in width */
+    padding: 100px 10%;
+    border-radius: 0px;
+    max-width: none;
+    width: 100%;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -176,11 +171,11 @@ section {
 /* ─── Best Sellers Section (Backdrop Between Products) ────────────────────── */
 .best-sellers {
     padding: 100px 30px;
-    background-color: rgba(0, 0, 0, 0.6); /* Dark semi-transparent background for the whole section */
-    width: 100%; /* Ensure full width */
-    box-sizing: border-box; /* Include padding in width */
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    box-sizing: border-box;
 }
-/* ─── Adjust spacing between Hero and Best Sellers ─────────────────────────── */
+
 .hero {
     margin-bottom: 0;
 }
@@ -194,7 +189,7 @@ section {
 
 .best-sellers .overlay-section {
     max-width: 1200px;
-    padding: 0; /* already no padding */
+    padding: 0;
     margin: 0 auto;
 }
 
@@ -202,7 +197,7 @@ section {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 40px 60px; /* Adjust spacing between items */
+    gap: 40px 60px;
     margin-top: 40px;
     align-items: flex-start;
     justify-content: center;
@@ -214,7 +209,7 @@ section {
 .best-seller-item button {
     background-color: #666;
     color: white;
-    border: none;             /* Remove default border */
+    border: none;
     padding: 14px 28px;
     border-radius: 10px;
     font-size: 1.2rem;
@@ -249,11 +244,11 @@ section {
 }
 
 .button {
-    background-color: transparent !important; /* fully transparent */
+    background-color: transparent !important;
     padding: 14px 28px;
     margin: 0;
     border: none;
-    box-shadow: none !important; /* remove any shadow */
+    box-shadow: none !important;
     color: white !important;
     text-decoration: none;
     border-radius: 10px;
@@ -265,20 +260,20 @@ section {
 .button:hover {
     background-color: transparent !important;
     transform: translateY(-3px);
-    box-shadow: none !important; /* prevent shadow on hover */
+    box-shadow: none !important;
 }
 
 /* ─── Footer ──────────────────────────────────────────────────────────────── */
 footer {
     background-color: #111;
-    padding: 40px 0; /* Adjusted padding to extend full width */
+    padding: 40px 0;
     text-align: center;
     border-top: 1px solid #333;
     font-family: sans-serif;
     position: relative;
     z-index: 1;
-    width: 100%; /* Make it full width */
-    box-sizing: border-box; /* Include padding in width */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 footer p {
@@ -289,10 +284,9 @@ footer p {
 
 /* ─── Responsive Adjustments ──────────────────────────────────────────────── */
 @media (max-width: 1200px) {
-    /* Keep nav-container max-width for internal content */
     .nav-container {
         max-width: 90%;
-        padding: 0 20px; /* Adjust padding for nav */
+        padding: 0 20px;
     }
     .overlay-text {
         padding: 60px 80px;
@@ -304,14 +298,13 @@ footer p {
         font-size: 2rem;
     }
     .overlay-section {
-        padding: 80px 5%; /* Adjust percentage padding for wider screens */
+        padding: 80px 5%;
     }
     .why-us h2,
     .coming-soon h2,
     .best-sellers h2 {
         font-size: 3.2rem;
     }
-    /* Best Sellers Grid internal content max-width */
     .best-sellers-grid {
         max-width: 900px;
     }
@@ -341,7 +334,7 @@ footer p {
         font-size: 1.8rem;
     }
     .overlay-section {
-        padding: 60px 5%; /* Continue using percentage padding */
+        padding: 60px 5%;
     }
     .why-us h2,
     .coming-soon h2,
@@ -360,42 +353,21 @@ footer p {
     }
 }
 
-/* ─── Button Transparent Background Snippet ───────────────────────────────── */
-.button {
-    background-color: transparent !important;
-    padding: 14px 28px;
-    margin: 0;
-    border: none;
-    box-shadow: none;
-    color: white;
-    text-decoration: none;
-    border-radius: 10px;
-    transition: transform 0.2s ease;
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-
-.button:hover {
-    background-color: transparent !important;
-    transform: translateY(-3px);
-}
-
-/* ─── Cart Section Styling ───────────────────────────────────────────── */
-
+/* ─── Cart Section Styling (Updated) ───────────────────────────────────────────── */
 .cart-overlay {
   position: fixed;
-  top: 60px; /* below header */
+  top: 60px;
   right: 20px;
   width: 350px;
   max-height: 80vh;
-  background-color: rgba(0, 0, 0, 0.85);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.8);
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
   border-radius: 12px;
   padding: 24px 20px;
   overflow-y: auto;
   z-index: 1100;
   font-family: 'Poppins', sans-serif;
-  color: white;
+  color: black;
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -406,16 +378,16 @@ footer p {
   font-weight: 700;
   font-size: 1.8rem;
   margin-bottom: 12px;
-  border-bottom: 1px solid #555;
+  border-bottom: 1px solid #ccc;
   padding-bottom: 8px;
-  color: black !important; /* FORCE black color for 'Your Cart' */
+  color: black !important;
 }
 
 .cart-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #ccc;
   padding-bottom: 12px;
   margin-bottom: 12px;
 }
@@ -427,17 +399,17 @@ footer p {
 }
 
 .cart-item-name {
-  color: black !important; /* your request */
   font-weight: 600;
   flex: 1 1 auto;
   font-size: 1.2rem;
   text-align: left;
   margin-right: 10px;
+  color: black;
 }
 
 .cart-item-quantity {
   font-size: 1rem;
-  color: #ccc;
+  color: #555;
   margin-right: 10px;
   min-width: 30px;
   text-align: center;
@@ -446,7 +418,7 @@ footer p {
 .cart-item-price {
   font-weight: 700;
   font-size: 1.1rem;
-  color: white;
+  color: black;
   min-width: 60px;
   text-align: right;
 }
@@ -454,7 +426,7 @@ footer p {
 .cart-item-remove {
   background: transparent;
   border: none;
-  color: #ff4d4d;
+  color: #e63946;
   cursor: pointer;
   font-weight: 700;
   font-size: 1.2rem;
@@ -462,7 +434,7 @@ footer p {
 }
 
 .cart-item-remove:hover {
-  color: #ff1a1a;
+  color: #d62828;
 }
 
 .cart-total {
@@ -470,8 +442,9 @@ footer p {
   font-size: 1.4rem;
   font-weight: 700;
   text-align: right;
-  border-top: 1px solid #555;
+  border-top: 1px solid #ccc;
   padding-top: 12px;
+  color: black;
 }
 
 .cart-checkout-btn {
