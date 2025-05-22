@@ -107,17 +107,17 @@
 
     .cart-section label {
       font-weight: 600;
-      margin-left: 10px;
-      color: #eee;
-      font-size: 14px;
+      margin-left: 8px;
       cursor: pointer;
-      flex-grow: 1;
+      user-select: none;
+      flex: 1;
+      font-size: 15px;
+      color: #eee;
     }
 
     .cart-section input[type="checkbox"] {
+      transform: scale(1.1);
       cursor: pointer;
-      width: 18px;
-      height: 18px;
     }
 
     .cart-section input, .cart-section textarea {
@@ -184,7 +184,7 @@
   <span class="close-btn" onclick="closeCart()">&times;</span>
   <h2>Your Cart</h2>
   <ul id="cart-items">
-    <li>Your cart is empty.</li>
+    <!-- Cart items and Select All checkbox will be generated here -->
   </ul>
   <button onclick="closeCart()">Close Cart</button>
   <button id="buy-now-btn" onclick="buyNow()" disabled>Buy Now</button>
@@ -251,14 +251,14 @@
     <ul>
       <li>Curated collection of luxury &amp; street fashion fragrances</li>
       <li>Fast, free shipping on all orders</li>
-      <li>Unbeatable prices and discounts</li>
-      <li>100% authentic, guaranteed</li>
+      <li>100% authentic products — no fakes, ever</li>
+      <li>Exclusive prices. Only online.</li>
     </ul>
   </div>
 </section>
 
-<footer class="site-footer">
-  <p>© 2025 DebloatX. All rights reserved.</p>
+<footer>
+  <p>&copy; 2025 DebloatX. All rights reserved.</p>
 </footer>
 
 <script>
@@ -276,6 +276,23 @@
     document.getElementById('cart-count').innerText = cartItems.length;
     const buyBtn = document.getElementById('buy-now-btn');
     buyBtn.disabled = selectedItems.size === 0;
+
+    const selectAllCheckbox = document.getElementById('select-all-checkbox');
+    if (!selectAllCheckbox) return;
+
+    if (cartItems.length === 0) {
+      selectAllCheckbox.checked = false;
+      selectAllCheckbox.indeterminate = false;
+    } else if (selectedItems.size === cartItems.length) {
+      selectAllCheckbox.checked = true;
+      selectAllCheckbox.indeterminate = false;
+    } else if (selectedItems.size > 0) {
+      selectAllCheckbox.checked = false;
+      selectAllCheckbox.indeterminate = true;
+    } else {
+      selectAllCheckbox.checked = false;
+      selectAllCheckbox.indeterminate = false;
+    }
   }
 
   function showCart() {
@@ -283,8 +300,42 @@
     const cartList = document.getElementById('cart-items');
     cartList.innerHTML = '';
 
+    // Create Select All label and checkbox
+    if (cartItems.length > 0) {
+      const selectAllLabel = document.createElement('label');
+      selectAllLabel.style.cssText = "display: block; margin-bottom: 10px; color: #eee; user-select: none;";
+      selectAllLabel.htmlFor = 'select-all-checkbox';
+
+      const selectAllCheckbox = document.createElement('input');
+      selectAllCheckbox.type = 'checkbox';
+      selectAllCheckbox.id = 'select-all-checkbox';
+
+      selectAllCheckbox.addEventListener('change', () => {
+        if (selectAllCheckbox.checked) {
+          for (let i = 0; i < cartItems.length; i++) {
+            selectedItems.add(i);
+          }
+        } else {
+          selectedItems.clear();
+        }
+        showCart();
+      });
+
+      selectAllLabel.appendChild(selectAllCheckbox);
+      selectAllLabel.appendChild(document.createTextNode(' Select All'));
+      cartList.appendChild(selectAllLabel);
+    }
+
     if (cartItems.length === 0) {
-      cartList.innerHTML = '<li>Your cart is empty.</li>';
+      const emptyLi = document.createElement('li');
+      emptyLi.textContent = 'Your cart is empty.';
+      emptyLi.style.cursor = 'default';
+      emptyLi.style.border = 'none';
+      emptyLi.style.padding = '0';
+      emptyLi.style.margin = '0';
+      emptyLi.style.color = '#ddd';
+      emptyLi.style.fontWeight = '400';
+      cartList.appendChild(emptyLi);
       selectedItems.clear();
     } else {
       cartItems.forEach((item, index) => {
@@ -304,76 +355,4 @@
           updateCartCount();
         });
 
-        const label = document.createElement('label');
-        label.htmlFor = checkbox.id;
-        label.textContent = item;
-        label.style.marginLeft = '10px';
-        label.style.cursor = 'pointer';
-
-        li.appendChild(checkbox);
-        li.appendChild(label);
-
-        cartList.appendChild(li);
-      });
-    }
-
-    cartSection.style.display = 'block';
-    document.getElementById('checkout').style.display = 'none';
-
-    updateCartCount();
-  }
-
-  function closeCart() {
-    document.getElementById('cart').style.display = 'none';
-  }
-
-  function buyNow() {
-    if (selectedItems.size === 0) {
-      alert("Please select at least one product to buy.");
-      return;
-    }
-
-    const itemsToBuy = [...selectedItems].map(index => cartItems[index]);
-    window.itemsToBuy = itemsToBuy;
-
-    document.getElementById('cart').style.display = 'none';
-    document.getElementById('checkout').style.display = 'block';
-  }
-
-  document.getElementById('checkout-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const name = document.getElementById('full-name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const address = document.getElementById('address').value.trim();
-
-    if (!name || !email || !address) {
-      alert('Please fill in all the fields.');
-      return;
-    }
-
-    if (!window.itemsToBuy || window.itemsToBuy.length === 0) {
-      alert('No items selected for purchase.');
-      return;
-    }
-
-    alert(`Thank you, ${name}! Your order for:\n- ${window.itemsToBuy.join('\n- ')}\nhas been placed.\nWe will ship to:\n${address}\nA confirmation email will be sent to ${email}.`);
-
-    cartItems = cartItems.filter((_, index) => !selectedItems.has(index));
-    selectedItems.clear();
-
-    updateCartCount();
-    document.getElementById('checkout-form').reset();
-
-    document.getElementById('checkout').style.display = 'none';
-    showCart();
-  });
-
-  function cancelCheckout() {
-    document.getElementById('checkout').style.display = 'none';
-    showCart();
-  }
-</script>
-
-</body>
-</html>
+        const label = document.createElement('label
