@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-    /* Enhanced cart styling */
+    /* ======= Updated Cart Section Styles ======= */
     .cart-section {
       position: fixed;
       top: 70px;
@@ -53,7 +53,6 @@
       margin: 0 0 24px 0;
     }
 
-    /* Updated cart items with checkbox and spacing */
     #cart-items li {
       display: flex;
       align-items: center;
@@ -68,11 +67,13 @@
     #cart-items li span {
       flex: 1;
       margin-left: 10px;
+      user-select: none;
     }
 
     #cart-items li input[type="checkbox"] {
       transform: scale(1.3);
       cursor: pointer;
+      flex-shrink: 0;
     }
 
     .remove-btn {
@@ -83,6 +84,7 @@
       cursor: pointer;
       margin-left: 12px;
       transition: color 0.3s ease;
+      flex-shrink: 0;
     }
 
     .remove-btn:hover {
@@ -100,6 +102,7 @@
       width: 100%;
       font-size: 1rem;
       transition: background-color 0.25s ease;
+      margin-top: 8px;
     }
 
     #checkout-btn:disabled {
@@ -111,10 +114,9 @@
       background-color: #333;
     }
 
-    /* Separate close cart button style */
-    #cart button:last-child {
-      margin-top: 12px;
+    .cart-section button#close-cart-btn {
       background: #777;
+      margin-top: 12px;
     }
 
     .cart-section::-webkit-scrollbar {
@@ -147,13 +149,12 @@
 </header>
 
 <!-- Updated Cart Section -->
-<section id="cart" class="cart-section">
+<section id="cart" class="cart-section" aria-label="Shopping Cart">
   <h2>Your Cart</h2>
   <ul id="cart-items">
     <li>Your cart is empty.</li>
   </ul>
-  <button id="checkout-btn" onclick="checkout()" disabled>Checkout Selected Items</button>
-  <button onclick="closeCart()">Close Cart</button>
+  <!-- Buttons will be added dynamically by JS -->
 </section>
 
 <section class="hero">
@@ -235,21 +236,27 @@
 
     if (cartItems.length === 0) {
       cartList.innerHTML = '<li>Your cart is empty.</li>';
+      removeCartButtons();
     } else {
       cartItems.forEach((item, index) => {
         const li = document.createElement('li');
-
         li.innerHTML = `
           <input type="checkbox" id="select-${index}" data-index="${index}" onchange="toggleCheckoutButton()" />
           <span>${item}</span>
           <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
         `;
-
         cartList.appendChild(li);
       });
+      addCartButtons();
     }
 
-    // Add or update Checkout button only once after the list
+    cartSection.style.display = 'block';
+  }
+
+  function addCartButtons() {
+    const cartSection = document.getElementById('cart');
+
+    // Add Checkout button if missing
     if (!document.getElementById('checkout-btn')) {
       const checkoutBtn = document.createElement('button');
       checkoutBtn.id = 'checkout-btn';
@@ -259,7 +266,7 @@
       cartSection.appendChild(checkoutBtn);
     }
 
-    // Add or update Close Cart button only once after checkout button
+    // Add Close Cart button if missing
     if (!document.getElementById('close-cart-btn')) {
       const closeBtn = document.createElement('button');
       closeBtn.id = 'close-cart-btn';
@@ -267,18 +274,23 @@
       closeBtn.onclick = closeCart;
       cartSection.appendChild(closeBtn);
     }
+  }
 
-    cartSection.style.display = 'block';
+  function removeCartButtons() {
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const closeBtn = document.getElementById('close-cart-btn');
+
+    if (checkoutBtn) checkoutBtn.remove();
+    if (closeBtn) closeBtn.remove();
   }
 
   function toggleCheckoutButton() {
     const checkboxes = document.querySelectorAll('#cart-items input[type="checkbox"]');
     const checkoutBtn = document.getElementById('checkout-btn');
 
-    // Enable checkout if at least one checkbox is checked
     const isAnyChecked = Array.from(checkboxes).some(cb => cb.checked);
 
-    checkoutBtn.disabled = !isAnyChecked;
+    if (checkoutBtn) checkoutBtn.disabled = !isAnyChecked;
   }
 
   function checkoutSelected() {
@@ -297,12 +309,9 @@
       return;
     }
 
-    // For demo: just alert the selected items.
-    // Replace this with real checkout flow as needed.
     alert('Checking out the following items:\n' + selectedItems.join('\n'));
 
-    // Optional: remove checked items from cart after checkout
-    // Remove from last to first to avoid index shifting issues
+    // Remove checked items from cart (last to first)
     for (let i = cartItems.length - 1; i >= 0; i--) {
       if (checkboxes[i].checked) {
         cartItems.splice(i, 1);
@@ -317,7 +326,6 @@
     document.getElementById('cart').style.display = 'none';
   }
 </script>
-
 
 </body>
 </html>
