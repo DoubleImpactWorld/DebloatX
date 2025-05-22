@@ -11,65 +11,95 @@
   <style>
     /* Your existing styles... */
 
-    /* Added simple style for cart */
+    /* Updated, aesthetic style for cart */
     .cart-section {
       position: fixed;
       top: 60px;
       right: 20px;
-      background: #fff; /* white background */
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-      padding: 24px 32px;
-      width: 320px;
-      max-height: 420px;
+      background: #fafafa; /* soft off-white background */
+      border-radius: 16px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+      padding: 28px 36px;
+      width: 340px;
+      max-height: 480px;
       overflow-y: auto;
       z-index: 9999;
-      display: none;
       font-family: 'Poppins', sans-serif;
+      color: #333;
+      display: none;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      transform: translateX(20px);
+      opacity: 0;
+    }
+
+    .cart-section.show {
+      transform: translateX(0);
+      opacity: 1;
+      display: block;
     }
 
     .cart-section h2 {
       margin-top: 0;
-      margin-bottom: 20px;
-      color: #111;
+      margin-bottom: 24px;
+      color: #222;
       font-weight: 700;
-      font-size: 1.8rem;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 8px;
+      font-size: 2rem;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+      letter-spacing: 0.05em;
     }
 
     #cart-items {
       list-style: none;
       padding: 0;
-      margin: 0 0 24px 0;
+      margin: 0 0 28px 0;
     }
 
     #cart-items li {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 0;
-      border-bottom: 1px solid #eee;
+      padding: 14px 0;
+      border-bottom: 1px solid #ddd;
       font-weight: 600;
-      font-size: 1rem;
-      color: black !important; /* Force black text */
+      font-size: 1.1rem;
+      color: #444;
+      position: relative;
+    }
+
+    #cart-items li:last-child {
+      border-bottom: none;
+    }
+
+    #cart-items li::before {
+      content: "•";
+      color: #ff6f61; /* subtle accent color */
+      margin-right: 10px;
+      font-size: 1.4rem;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     .cart-section button {
       cursor: pointer;
-      background-color: #111;
+      background-color: #ff6f61; /* warm coral accent */
       color: white;
       border: none;
-      padding: 12px 20px;
+      padding: 14px 0;
       font-weight: 700;
-      border-radius: 8px;
+      border-radius: 12px;
       width: 100%;
-      transition: background-color 0.3s ease;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
+      box-shadow: 0 4px 12px rgba(255, 111, 97, 0.4);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      letter-spacing: 0.04em;
     }
 
     .cart-section button:hover {
-      background-color: #333;
+      background-color: #e6554b;
+      box-shadow: 0 6px 16px rgba(230, 85, 75, 0.6);
     }
   </style>
 </head>
@@ -181,11 +211,16 @@
         cartList.appendChild(li);
       });
     }
-    cartSection.style.display = 'block';
+
+    cartSection.classList.add('show');
   }
 
   function closeCart() {
-    document.getElementById('cart').style.display = 'none';
+    const cartSection = document.getElementById('cart');
+    cartSection.classList.remove('show');
+    setTimeout(() => {
+      cartSection.style.display = 'none';
+    }, 300);
   }
 </script>
 
