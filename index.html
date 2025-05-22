@@ -7,6 +7,158 @@
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* Improved Cart Section Styling */
+    .cart-section {
+      position: fixed;
+      top: 60px;
+      right: 20px;
+      background: rgba(30, 30, 30, 0.95);
+      border-radius: 12px;
+      padding: 25px 30px;
+      width: 320px;
+      max-height: 420px;
+      overflow-y: auto;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      z-index: 999;
+      display: none;
+      color: #f0f0f0;
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      line-height: 1.4;
+      user-select: none;
+    }
+
+    .cart-section h2 {
+      margin-top: 0;
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: 1px;
+      color: #fff;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #444;
+      padding-bottom: 10px;
+      position: relative;
+    }
+
+    .cart-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px 0;
+      max-height: 280px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #666 transparent;
+    }
+
+    .cart-section ul::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .cart-section ul::-webkit-scrollbar-thumb {
+      background-color: #666;
+      border-radius: 3px;
+    }
+
+    .cart-section li {
+      padding: 12px 10px;
+      border-bottom: 1px solid #444;
+      color: #ddd;
+      font-weight: 500;
+      cursor: default;
+      transition: background-color 0.2s ease;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    .cart-section li:hover {
+      background-color: #3a3a3a;
+    }
+
+    .cart-section button {
+      cursor: pointer;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      font-weight: 600;
+      border-radius: 30px;
+      margin-right: 10px;
+      box-shadow: 0 4px 10px rgba(37, 117, 252, 0.6);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      font-size: 14px;
+      user-select: none;
+    }
+
+    .cart-section button:hover:not(:disabled) {
+      background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+      box-shadow: 0 6px 14px rgba(106, 17, 203, 0.8);
+    }
+
+    .cart-section button:disabled {
+      background: #555;
+      cursor: not-allowed;
+      box-shadow: none;
+      color: #999;
+    }
+
+    .cart-section label {
+      font-weight: 600;
+      margin-left: 10px;
+      color: #eee;
+      font-size: 14px;
+      cursor: pointer;
+      flex-grow: 1;
+    }
+
+    .cart-section input[type="checkbox"] {
+      cursor: pointer;
+      width: 18px;
+      height: 18px;
+    }
+
+    .cart-section input, .cart-section textarea {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 14px;
+      background-color: #222;
+      color: #eee;
+      resize: vertical;
+      box-shadow: inset 0 0 6px #111;
+      transition: background-color 0.3s ease;
+    }
+
+    .cart-section input:focus, .cart-section textarea:focus {
+      background-color: #333;
+      outline: none;
+    }
+
+    .cart-section textarea {
+      min-height: 80px;
+    }
+
+    /* Close button inside cart */
+    .cart-section .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 24px;
+      color: #888;
+      cursor: pointer;
+      transition: color 0.2s ease;
+      user-select: none;
+    }
+
+    .cart-section .close-btn:hover {
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
 
@@ -67,6 +219,7 @@
   <div class="overlay-section">
     <h2>Our Best Sellers</h2>
     <div class="best-sellers-grid">
+
       <div class="best-seller-item">
         <img src="pant1.png" alt="Baggy Y2k Star Jeans" />
         <h3>Baggy Y2k Star Jeans</h3>
@@ -87,6 +240,7 @@
         <p>The striking green dial, complemented by the luxurious golden stainless steel strap, offers a perfect blend of sophistication and masculinity.</p>
         <button onclick="addToCart('Sonata Quartz Green Dial Watch'); event.stopPropagation();">Add to Cart</button>
       </div>
+
     </div>
   </div>
 </section>
@@ -203,14 +357,16 @@
       return;
     }
 
-    localStorage.setItem('checkoutInfo', JSON.stringify({
-      name,
-      email,
-      address,
-      items: window.itemsToBuy
-    }));
+    alert(Thank you, ${name}! Your order for:\n- ${window.itemsToBuy.join('\n- ')}\nhas been placed.\nWe will ship to:\n${address}\nA confirmation email will be sent to ${email}.);
 
-    window.location.href = 'payment.html';
+    cartItems = cartItems.filter((_, index) => !selectedItems.has(index));
+    selectedItems.clear();
+
+    updateCartCount();
+    document.getElementById('checkout-form').reset();
+
+    document.getElementById('checkout').style.display = 'none';
+    showCart();
   });
 
   function cancelCheckout() {
