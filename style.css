@@ -100,13 +100,21 @@ body, h1, h2, h3, h4, h5, h6, p, a, li, ul, span, div, button {
 }
 
 .overlay-text {
-    background-color: rgba(0, 0, 0, 0.6);
+    /* Smooth gradient black transparent background */
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 0, 0, 0.8) 100%
+    );
+
     padding: 80px 100px;
-    border-radius: 0px; /* Removed border-radius to ensure sharp edges to the sides */
-    max-width: none; /* Removed max-width */
-    width: 100%; /* Make it take full width of its parent */
-    box-sizing: border-box; /* Include padding in width */
+    border-radius: 0;
+    max-width: none;
+    width: 100%;
+    box-sizing: border-box;
 }
+
 
 h1 {
     font-size: 5.5rem;
