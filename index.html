@@ -53,15 +53,26 @@
       margin: 0 0 24px 0;
     }
 
+    /* Updated cart items with checkbox and spacing */
     #cart-items li {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid #f0f0f0;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
       font-weight: 500;
       font-size: 1rem;
       color: #222;
+    }
+
+    #cart-items li span {
+      flex: 1;
+      margin-left: 10px;
+    }
+
+    #cart-items li input[type="checkbox"] {
+      transform: scale(1.3);
+      cursor: pointer;
     }
 
     .remove-btn {
@@ -70,7 +81,8 @@
       color: #888;
       font-size: 0.9rem;
       cursor: pointer;
-      margin-left: 10px;
+      margin-left: 12px;
+      transition: color 0.3s ease;
     }
 
     .remove-btn:hover {
@@ -87,11 +99,22 @@
       border-radius: 10px;
       width: 100%;
       font-size: 1rem;
-      transition: all 0.25s ease;
+      transition: background-color 0.25s ease;
     }
 
-    .cart-section button:hover {
+    #checkout-btn:disabled {
+      background-color: #555;
+      cursor: not-allowed;
+    }
+
+    #checkout-btn:not(:disabled):hover {
       background-color: #333;
+    }
+
+    /* Separate close cart button style */
+    #cart button:last-child {
+      margin-top: 12px;
+      background: #777;
     }
 
     .cart-section::-webkit-scrollbar {
@@ -123,12 +146,13 @@
   </div>
 </header>
 
-<!-- Cart Section -->
+<!-- Updated Cart Section -->
 <section id="cart" class="cart-section">
   <h2>Your Cart</h2>
   <ul id="cart-items">
     <li>Your cart is empty.</li>
   </ul>
+  <button id="checkout-btn" onclick="checkout()" disabled>Checkout Selected Items</button>
   <button onclick="closeCart()">Close Cart</button>
 </section>
 
@@ -207,22 +231,81 @@
   function showCart() {
     const cartSection = document.getElementById('cart');
     const cartList = document.getElementById('cart-items');
+    const checkoutBtn = document.getElementById('checkout-btn');
     cartList.innerHTML = '';
 
     if (cartItems.length === 0) {
       cartList.innerHTML = '<li>Your cart is empty.</li>';
+      checkoutBtn.disabled = true;
     } else {
       cartItems.forEach((item, index) => {
         const li = document.createElement('li');
-        li.innerHTML = `
-          <span>${item}</span>
-          <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
-        `;
+
+        // Create checkbox input
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = 'cart-checkbox-' + index;
+        checkbox.checked = false;
+
+        // On checkbox toggle, update checkout button status
+        checkbox.addEventListener('change', () => {
+          updateCheckoutButton();
+        });
+
+        // Create label span for product name
+        const label = document.createElement('span');
+        label.textContent = item;
+
+        // Create remove button
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'remove-btn';
+        removeBtn.textContent = 'Remove';
+        removeBtn.onclick = () => removeFromCart(index);
+
+        li.appendChild(checkbox);
+        li.appendChild(label);
+        li.appendChild(removeBtn);
+
         cartList.appendChild(li);
       });
+
+      checkoutBtn.disabled = true;
     }
 
     cartSection.style.display = 'block';
+  }
+
+  function updateCheckoutButton() {
+    const checkboxes = document.querySelectorAll('#cart-items input[type="checkbox"]');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
+    checkoutBtn.disabled = !anyChecked;
+  }
+
+  function checkout() {
+    const checkboxes = document.querySelectorAll('#cart-items input[type="checkbox"]');
+    const selectedItems = [];
+
+    checkboxes.forEach((cb, idx) => {
+      if (cb.checked) selectedItems.push(cartItems[idx]);
+    });
+
+    if (selectedItems.length === 0) {
+      alert('Please select items to checkout.');
+      return;
+    }
+
+    alert('Checking out:\n' + selectedItems.join('\n'));
+
+    // Remove checked items from cart after checkout
+    for (let i = cartItems.length - 1; i >= 0; i--) {
+      if (checkboxes[i].checked) {
+        cartItems.splice(i, 1);
+      }
+    }
+
+    updateCartCount();
+    showCart();
   }
 
   function closeCart() {
