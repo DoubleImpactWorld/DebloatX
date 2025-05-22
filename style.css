@@ -1,11 +1,10 @@
 /* ─── Global & Background ─────────────────────────────────────────────────── */
 body {
-
     margin: 0;
     padding: 0;
     background: url('lol.png') center center / cover no-repeat fixed;
     font-family: 'Poppins', sans-serif;
-    color: white;
+    color: white; /* ✅ This makes all text white unless overridden */
 }
 
 /* ─── Top Navigation Bar (Translucent Pane) ───────────────────────────────── */
