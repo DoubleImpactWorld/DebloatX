@@ -242,21 +242,25 @@ section {
 }
 
 .button {
-    display: inline-block;
+    background-color: transparent !important; /* fully transparent */
     padding: 14px 28px;
-    background-color: #666;
-    color: white;
+    margin: 0;
+    border: none;
+    box-shadow: none !important; /* remove any shadow */
+    color: white !important;
     text-decoration: none;
     border-radius: 10px;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    transition: transform 0.2s ease;
     font-size: 1.2rem;
     font-weight: 600;
 }
 
 .button:hover {
-    background-color: #888;
+    background-color: transparent !important;
     transform: translateY(-3px);
+    box-shadow: none !important; /* prevent shadow on hover */
 }
+
 
 /* ─── Footer ──────────────────────────────────────────────────────────────── */
 footer {
