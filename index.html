@@ -1,92 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Product Website</title>
- <link rel="stylesheet" href="styles.css" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>DebloatX</title>
+
+    <!-- ✅ Load Poppins from Google Fonts -->
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- ✅ Link your external stylesheet -->
+    <link rel="stylesheet" href="style.css"/>
+
+    <!-- ✅ Apply Poppins globally -->
+    <style>
+        body, h1, h2, h3, h4, h5, h6, p, a, ul, li, button {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <header class="site-header">
-    <nav class="nav-container">
-      <ul class="nav-list">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Best Sellers</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+    <header class="site-header">
+        <nav class="nav-container">
+            <ul class="nav-list">
+                <li class="cart"><a href="#">🛒</a></li>
+                <li><a href="shoes.html">Shoes</a></li>
+                <li><a href="clothing.html">Clothing</a></li>
+                <li><a href="perfumes.html">Perfumes</a></li>
+                <li><a href="beauty.html">Beauty Products</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <!-- Hero Section (added for consistency with CSS) -->
-  <section class="hero">
-    <div class="overlay-text">
-      <h1>Welcome to DebloatX</h1>
-      <p>Discover the best products & services we offer</p>
-    </div>
-  </section>
-
-  <!-- Best Sellers Section -->
-  <section class="best-sellers">
-    <div class="section-title">
-      <h2>Best Sellers</h2>
-    </div>
-    <div class="overlay-section">
-      <div class="best-sellers-grid">
-        <div class="best-seller-item">
-          <img src="product1.jpg" alt="Product 1">
-          <h3>Product 1</h3>
-          <p>Description of product 1.</p>
-          <a href="#" class="button">Buy Now</a>
+    <div class="hero">
+        <div class="overlay-text">
+            <h1>DebloatX</h1>
+            <p>Luxury scents &amp; streetwear — dropshipped to your door.</p>
         </div>
-        <div class="best-seller-item">
-          <img src="product2.jpg" alt="Product 2">
-          <h3>Product 2</h3>
-          <p>Description of product 2.</p>
-          <a href="#" class="button">Buy Now</a>
+    </div>
+
+    <section class="why-us">
+        <div class="overlay-section">
+            <h2>Why Choose Us?</h2>
+            <ul>
+                <li>Curated collection of luxury &amp; street fashion fragrances</li>
+                <li>Fast, free shipping on all orders</li>
+                <li>100% authentic products — no fakes, ever</li>
+                <li>Exclusive prices. Only online.</li>
+            </ul>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Our Services Section -->
-  <section class="our-services">
-    <div class="section-title">
-      <h2>Our Services</h2>
-    </div>
-    <div class="overlay-section">
-      <div class="service-item">
-        <i class="fas fa-cogs"></i>
-        <h3>Service 1</h3>
-        <p>Our first service description.</p>
-      </div>
-      <div class="service-item">
-        <i class="fas fa-truck"></i>
-        <h3>Service 2</h3>
-        <p>Our second service description.</p>
-      </div>
-    </div>
-  </section>
+    <section class="best-sellers">
+        <div class="overlay-section">
+            <h2>Our Best Sellers</h2>
+            <div class="best-sellers-grid">
 
-  <!-- Call to Action Section -->
-  <section class="cta-section">
-    <h2>Get Started Today!</h2>
-    <p>Join our services to get the best deals and products.</p>
-    <a href="#" class="button">Sign Up</a>
-  </section>
+                <div class="best-seller-item">
+                    <img src="pant1.png" alt="Baggy Pants">
+                    <h3>Urban Commando Cargo Pants</h3>
+                    <p>Dominating the streets, these multi-pocket cargo pants blend rugged utility with a comfortable, relaxed fit. Perfect for the urban explorer seeking style and function.</p>
+                    <a href="#" class="button">View Details</a>
+                </div>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-links">
-      <a href="#">Privacy Policy</a>
-      <a href="#">Terms of Service</a>
-      <a href="#">Contact</a>
-    </div>
-    <p>&copy; 2025 DebloatX</p>
-  </footer>
+                <div class="best-seller-item">
+                    <img src="y2k-baggy-jeans.jpg" alt="Y2K Baggy Jeans">
+                    <h3>Nostalgia Ride Y2K Denim</h3>
+                    <p>Throwback style meets modern comfort. These iconic wide-leg jeans with subtle embroidery capture the essence of early 2000s hip-hop fashion.</p>
+                    <a href="#" class="button">View Details</a>
+                </div>
+
+                <div class="best-seller-item">
+                    <img src="irregular-texture-shirt.jpg" alt="Irregular Design Shirt">
+                    <h3>Abstract Flow Long Sleeve Shirt</h3>
+                    <p>Redefine your style with this uniquely textured, irregular-design shirt. Its distinctive crinkled fabric adds an artistic edge to any outfit.</p>
+                    <a href="#" class="button">View Details</a>
+                </div>
+
+                <div class="best-seller-item">
+                    <img src="corduroy-shirt.jpg" alt="Corduroy Shirt">
+                    <h3>Classic Ribbed Corduroy Shirt</h3>
+                    <p>Timeless appeal and soft texture. This versatile corduroy shirt offers a sophisticated yet casual look, perfect for layering or standalone style.</p>
+                    <a href="#" class="button">View Details</a>
+                </div>
+
+                <div class="best-seller-item">
+                    <img src="waffle-knit-sweater.jpg" alt="Waffle Knit Sweater">
+                    <h3>Cozy Waffle Weave Pullover</h3>
+                    <p>Embrace ultimate comfort and style with our best-selling waffle knit sweater. Its rich texture and soft feel make it an essential for cooler days.</p>
+                    <a href="#" class="button">View Details</a>
+                </div>
+
+                <div class="best-seller-item">
+                    <img src="placeholder-shoe.jpg" alt="Best Selling Shoe">
+                    <h3>Luxury Comfort Sneakers</h3>
+                    <p>Experience unparalleled comfort and style with our top-selling luxury sneakers. Crafted with premium leather for all-day wear.</p>
+                    <a href="#" class="button">View Details</a>
+                </div>
+
+                <div class="best-seller-item">
+                    <img src="placeholder-perfume.jpg" alt="Best Selling Perfume">
+                    <h3>Midnight Bloom Eau de Parfum</h3>
+                    <p>Our most sought-after fragrance, an intoxicating blend of floral and woody notes. Captivating and perfect for evening wear.</p>
+                    <a href="#" class="button">View Details</a>
+                </div>
+
+                <div class="best-seller-item">
+                    <img src="placeholder-beauty.jpg" alt="Best Selling Beauty Product">
+                    <h3>Radiant Glow Serum</h3>
+                    <p>Experience a transformation with our best-selling serum. Revitalizes skin for a smoother, brighter, and more youthful complexion.</p>
+                    <a href="#" class="button">View Details</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="coming-soon">
+        <div class="overlay-section">
+            <h2>Elevate Your Scent</h2>
+            <p>Explore our best-selling perfumes soon — made for those who move with style.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 DebloatX. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
