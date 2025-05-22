@@ -20,11 +20,11 @@ body, h1, h2, h3, h4, h5, h6, p, a, li, ul, span, div, button {
 .nav-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 30px; /* Horizontal padding */
+    padding: 0 30px;
     box-sizing: border-box;
     display: flex;
-    justify-content: space-between; /* Spread nav and cart */
     align-items: center;
+    justify-content: space-between;
 }
 
 .nav-list {
@@ -33,8 +33,10 @@ body, h1, h2, h3, h4, h5, h6, p, a, li, ul, span, div, button {
     justify-content: center;
     align-items: center;
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
+    flex: 1;
 }
+
 
 .nav-list li {
     margin: 0 20px;
