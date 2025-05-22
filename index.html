@@ -23,6 +23,7 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
       z-index: 999;
       display: none;
+      color: white;
     }
     .cart-section h2 {
       margin-top: 0;
@@ -35,6 +36,7 @@
     .cart-section li {
       padding: 5px 0;
       border-bottom: 1px solid #eee;
+      color: white;
     }
     .cart-section button {
       cursor: pointer;
@@ -44,6 +46,23 @@
       padding: 8px 12px;
       font-weight: 600;
       border-radius: 3px;
+      margin-right: 10px;
+    }
+    .cart-section label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    .cart-section input, .cart-section textarea {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 15px;
+      border-radius: 3px;
+      border: none;
+      font-size: 14px;
+    }
+    .cart-section textarea {
+      resize: vertical;
     }
   </style>
 </head>
@@ -73,6 +92,25 @@
     <li>Your cart is empty.</li>
   </ul>
   <button onclick="closeCart()">Close Cart</button>
+  <button id="buy-now-btn" onclick="buyNow()" disabled>Buy Now</button>
+</section>
+
+<!-- Checkout Section -->
+<section id="checkout" class="cart-section">
+  <h2>Checkout</h2>
+  <form id="checkout-form">
+    <label for="full-name">Full Name:</label>
+    <input type="text" id="full-name" required />
+
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" required />
+
+    <label for="address">Shipping Address:</label>
+    <textarea id="address" rows="3" required></textarea>
+
+    <button type="submit">Confirm Purchase</button>
+    <button type="button" onclick="cancelCheckout()">Cancel</button>
+  </form>
 </section>
 
 <section class="hero">
@@ -139,6 +177,9 @@
 
   function updateCartCount() {
     document.getElementById('cart-count').innerText = cartItems.length;
+    // Enable buy button only if cart has items
+    const buyBtn = document.getElementById('buy-now-btn');
+    buyBtn.disabled = cartItems.length === 0;
   }
 
   function showCart() {
@@ -156,10 +197,57 @@
       });
     }
     cartSection.style.display = 'block';
+    
+    // Hide checkout form if visible
+    document.getElementById('checkout').style.display = 'none';
   }
 
   function closeCart() {
     document.getElementById('cart').style.display = 'none';
+  }
+
+  function buyNow() {
+    if (cartItems.length === 0) {
+      alert("Your cart is empty.");
+      return;
+    }
+    
+    // Hide cart section and show checkout form
+    document.getElementById('cart').style.display = 'none';
+    document.getElementById('checkout').style.display = 'block';
+  }
+
+  document.getElementById('checkout-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('full-name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const address = document.getElementById('address').value.trim();
+    
+    if (!name || !email || !address) {
+      alert('Please fill in all the fields.');
+      return;
+    }
+    
+    // Simulate purchase success
+    alert(`Thank you, ${name}! Your order has been placed.\nWe will ship to:\n${address}\nA confirmation email will be sent to ${email}.`);
+    
+    // Clear cart and form
+    cartItems = [];
+    updateCartCount();
+    
+    // Reset form fields
+    document.getElementById('checkout-form').reset();
+    
+    // Hide checkout form, show cart section (empty now)
+    document.getElementById('checkout').style.display = 'none';
+    showCart();
+  });
+
+  function cancelCheckout() {
+    // Hide checkout form and show cart again
+    document.getElementById('checkout').style.display = 'none';
+    showCart();
   }
 </script>
 
